@@ -1,0 +1,60 @@
+<div class="card glass mb-20">
+    <div class="card-header">
+        <span class="card-title"><i class="fa-solid fa-cube"></i> Informasi Brand</span>
+        <a href="{% url 'core:brand_update' %}" class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</a>
+    </div>
+    <div class="grid-2">
+        <div class="profile-main">
+            {% if brand.logo %}
+                <img src="{{ brand.logo }}" alt="{{ brand.name }}" class="profile-photo">
+            {% else %}
+                <div class="avatar-text avatar-blue profile-placeholder">{{ brand.name|slice:":2"|upper }}</div>
+            {% endif %}
+            <div class="profile-info">
+                <h2 class="profile-name">{{ brand.name }}</h2>
+                <p class="profile-realname">{{ brand.description|default:"Tidak ada deskripsi" }}</p>
+            </div>
+        </div>
+        <div>
+            <span class="card-title"><i class="fa-solid fa-hashtag"></i> Sosial Media</span>
+            <div class="social-grid mt-10">
+                {% if brand.facebook %}
+                    <a href="{{ brand.facebook }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-card social-facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                {% endif %}
+                {% if brand.tiktok %}
+                    <a href="{{ brand.tiktok }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-card social-tiktok">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                {% endif %}
+                {% if brand.instagram %}
+                    <a href="{{ brand.instagram }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-card social-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                {% endif %}
+                {% if brand.youtube %}
+                    <a href="{{ brand.youtube }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-card social-youtube">
+                        <i class="fa-brands fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

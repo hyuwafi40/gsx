@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Tag{% endblock %}
+{% block heading %}Tag{% endblock %}
+{% block subheading %}Kelola tag konten{% endblock %}
+{% block content %}
+    {% include "core/tag/hero.html" %}
+    {% include "core/tag/control.html" %}
+    <div id="tagTableContainer">{% include "core/tag/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="formModalContainer">
+        {% if show_form_modal %}
+            {% include "core/tag/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}

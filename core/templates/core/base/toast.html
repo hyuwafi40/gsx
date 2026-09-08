@@ -1,0 +1,12 @@
+<div id="toast-container"
+     class="toast-container"
+     role="status"
+     aria-live="polite"
+     aria-atomic="true">
+     {% for message in messages %}
+          <div class="glass toast toast-{{ message.tags|default:'info' }}">
+               <i class="fa-solid {% if 'success' in message.tags %}fa-circle-check{% elif 'error' in message.tags %}fa-circle-exclamation{% elif 'warning' in message.tags %}fa-triangle-exclamation{% else %}fa-circle-info{% endif %} toast-icon toast-icon-{{ message.tags|default:'info' }}"></i>
+               <span class="toast-message">{{ message }}</span>
+          </div>
+     {% endfor %}
+</div>

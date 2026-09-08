@@ -1,0 +1,10 @@
+{% if ad %}
+    <div class="blog-ad-slot blog-ad-slot--{{ ad.type_ads }}">
+        <a href="{{ ad.link }}"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="blog-ad-link">
+            <img src="{{ ad.image }}" alt="{{ ad.name }}" loading="lazy">
+        </a>
+    </div>
+{% endif %}

@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}Cari Peserta - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="Cari peserta terverifikasi di {{ blog_brand_name|default:"ApexUI" }}.">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blogparticipant.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-section-heading">
+        <span class="blog-section-eyebrow">Pencarian</span>
+        <h2 class="blog-section-title"><i class="fa-solid fa-magnifying-glass"></i> Cari Peserta</h2>
+    </div>
+    <form class="search-bar"
+          role="search"
+          aria-label="Pencarian peserta"
+          method="get"
+          action="{% url 'blog:participant_search' %}"
+          hx-get="{% url 'blog:participant_search' %}"
+          hx-target="#participantSearchResults"
+          hx-swap="innerHTML"
+          hx-trigger="keyup changed delay:300ms">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="text"
+               id="participantSearchInput"
+               name="q"
+               class="search-input"
+               aria-label="Cari berdasarkan nama panggung, nama, atau wilayah"
+               placeholder="Ketik nama panggung, nama, atau wilayah..."
+               value="{{ query }}"
+               autofocus>
+    </form>
+    <div id="participantSearchResults" aria-live="polite" aria-atomic="true">
+        {% include "blog/participant/search_content.html" %}
+    </div>
+{% endblock %}

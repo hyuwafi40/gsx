@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}Halaman - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="Daftar halaman informasi di {{ blog_brand_name|default:"ApexUI" }}.">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/page.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-section-heading">
+        <span class="blog-section-eyebrow">Informasi</span>
+        <h2 class="blog-section-title"><i class="fa-solid fa-file"></i> Halaman</h2>
+    </div>
+    <div class="blog-page-list">
+        {% for page in page_obj %}
+            <article class="blog-page-item blog-card">
+                <div class="blog-page-item-body">
+                    <h3><a href="{% url 'blog:page_detail' page.slug %}">{{ page.title }}</a></h3>
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">{{ page.created_at|date:"d M Y" }}</span>
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <p class="text-muted">Belum ada halaman.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

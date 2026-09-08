@@ -1,0 +1,14 @@
+<div class="modal modal-animated" id="deleteModal">
+    <div class="modal-header">
+        <span class="modal-title">Konfirmasi Hapus</span>
+        <button type="button" class="modal-close" aria-label="Close">×</button>
+    </div>
+    <p>Apakah Anda yakin ingin menghapus <strong id="deleteObjectName"></strong>?</p>
+    <form id="deleteForm" method="post" action="">
+        {% csrf_token %}
+        <div class="btn-group">
+            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Hapus</button>
+            <button type="button" class="btn btn-secondary modal-close">Batal</button>
+        </div>
+    </form>
+</div>

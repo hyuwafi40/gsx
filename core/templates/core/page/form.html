@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block title %}{% if form.instance.pk %}Edit Halaman{% else %}Tambah Halaman{% endif %}{% endblock %}
+{% block heading %}{% if form.instance.pk %}Edit Halaman{% else %}Tambah Halaman{% endif %}{% endblock %}
+{% block subheading %}Kelola halaman statis{% endblock %}
+{% block content %}
+    <div class="card glass mb-20">
+        <div class="card-header">
+            <span class="card-title"><i class="fa-solid fa-file"></i> {% if form.instance.pk %}Edit Halaman{% else %}Tambah Halaman{% endif %}</span>
+        </div>
+        <form method="post" action="{{ form_action }}">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan</button>
+                <a href="{% url 'core:page_list' %}" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i> Batal</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "core/base.html" %}
+{% block title %}{% if form.instance.pk %}Edit Participant{% else %}Tambah Participant{% endif %}{% endblock %}
+{% block heading %}{% if form.instance.pk %}Edit Participant{% else %}Tambah Participant{% endif %}{% endblock %}
+{% block subheading %}Lengkapi data peserta{% endblock %}
+{% block content %}
+    <div class="card glass mb-20">
+        <div class="card-header">
+            <span class="card-title"><i class="fa-solid fa-user-plus"></i> {% if form.instance.pk %}Edit Participant{% else %}Tambah Participant{% endif %}</span>
+        </div>
+        <form method="post" action="{{ form_action }}">
+            {% csrf_token %}
+            <div class="grid-2">
+                <div class="form-field">
+                    <label for="{{ form.name.id_for_label }}" class="form-label">Nama Lengkap</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="text-danger">{{ form.name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.stage_name.id_for_label }}" class="form-label">Nama Panggung</label>
+                    {{ form.stage_name }}
+                    {% if form.stage_name.errors %}<div class="text-danger">{{ form.stage_name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}<div class="text-danger">{{ form.email.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.nik.id_for_label }}" class="form-label">NIK</label>
+                    {{ form.nik }}
+                    {% if form.nik.errors %}<div class="text-danger">{{ form.nik.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.birthdate.id_for_label }}" class="form-label">Tanggal Lahir</label>
+                    {{ form.birthdate }}
+                    {% if form.birthdate.errors %}<div class="text-danger">{{ form.birthdate.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.gender.id_for_label }}" class="form-label">Jenis Kelamin</label>
+                    {{ form.gender }}
+                    {% if form.gender.errors %}<div class="text-danger">{{ form.gender.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.whatsapp.id_for_label }}" class="form-label">WhatsApp</label>
+                    {{ form.whatsapp }}
+                    {% if form.whatsapp.errors %}<div class="text-danger">{{ form.whatsapp.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.region.id_for_label }}" class="form-label">Wilayah</label>
+                    {{ form.region }}
+                    {% if form.region.errors %}<div class="text-danger">{{ form.region.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.photo_close.id_for_label }}" class="form-label">Foto Close Up (URL)</label>
+                    {{ form.photo_close }}
+                    {% if form.photo_close.errors %}<div class="text-danger">{{ form.photo_close.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.photo_selfie.id_for_label }}" class="form-label">Foto Selfie (URL)</label>
+                    {{ form.photo_selfie }}
+                    {% if form.photo_selfie.errors %}<div class="text-danger">{{ form.photo_selfie.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.instagram.id_for_label }}" class="form-label">Instagram</label>
+                    {{ form.instagram }}
+                    {% if form.instagram.errors %}<div class="text-danger">{{ form.instagram.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.tiktok.id_for_label }}" class="form-label">TikTok</label>
+                    {{ form.tiktok }}
+                    {% if form.tiktok.errors %}<div class="text-danger">{{ form.tiktok.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.facebook.id_for_label }}" class="form-label">Facebook</label>
+                    {{ form.facebook }}
+                    {% if form.facebook.errors %}<div class="text-danger">{{ form.facebook.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.invoice.id_for_label }}" class="form-label">Invoice (URL)</label>
+                    {{ form.invoice }}
+                    {% if form.invoice.errors %}<div class="text-danger">{{ form.invoice.errors }}</div>{% endif %}
+                </div>
+                <div class="form-field">
+                    <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                    {{ form.status }}
+                    {% if form.status.errors %}<div class="text-danger">{{ form.status.errors }}</div>{% endif %}
+                </div>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan</button>
+                <a href="{% url 'core:participant_list' %}" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i> Batal</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

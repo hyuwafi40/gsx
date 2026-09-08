@@ -1,0 +1,123 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}{{ participant.stage_name }} - Peserta - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="Profil peserta {{ participant.stage_name }} di {{ blog_brand_name|default:"ApexUI" }}.">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blogparticipant.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-participant-detail">
+        <div class="blog-participant-header">
+            <a href="{% url 'blog:participant_list' %}"
+               class="blog-btn-ghost-light mb-20">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar
+            </a>
+            <a href="{% url 'blog:participant_download' participant.pk %}"
+               class="blog-btn blog-btn-primary mb-20">
+                <i class="fa-solid fa-download"></i> Download
+            </a>
+        </div>
+        <div class="blog-participant-profile-card blog-card">
+            <div class="blog-participant-profile">
+                {% if participant.photo_selfie %}
+                    <img src="{{ participant.photo_selfie }}"
+                         alt="{{ participant.stage_name }}"
+                         class="blog-participant-photo">
+                {% else %}
+                    <div class="blog-participant-photo-placeholder">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                {% endif %}
+                <div class="blog-participant-basic">
+                    <h1 class="blog-participant-name">{{ participant.stage_name }}</h1>
+                    <p class="blog-participant-realname">{{ participant.name }}</p>
+                    <span class="status-badge status-active">{{ participant.get_status_display }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="blog-participant-registration-card blog-card">
+            <div class="blog-participant-registration-header">
+                <h2 class="blog-section-title"><i class="fa-solid fa-id-card"></i> Kartu Pendaftaran</h2>
+                <span>Diselenggarakan oleh {{ brand.name }}</span>
+            </div>
+            <div class="blog-participant-registration-grid">
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-id-card"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">NIK</span>
+                        <span class="blog-participant-registration-value">{{ masked_nik }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">Tanggal Lahir</span>
+                        <span class="blog-participant-registration-value">{{ masked_birthdate }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-venus-mars"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">Gender</span>
+                        <span class="blog-participant-registration-value">{{ participant.get_gender_display|default:"-" }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">WhatsApp</span>
+                        <span class="blog-participant-registration-value">{{ masked_whatsapp }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">Email</span>
+                        <span class="blog-participant-registration-value">{{ masked_email }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">Wilayah</span>
+                        <span class="blog-participant-registration-value">{{ participant.region|default:"-" }}</span>
+                    </div>
+                </div>
+                <div class="blog-participant-registration-item">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                    <div>
+                        <span class="blog-participant-registration-label">Tanggal Daftar</span>
+                        <span class="blog-participant-registration-value">{{ participant.created_at|date:"d M Y H:i" }}</span>
+                    </div>
+                </div>
+                {% if participant.status == "verified" %}
+                    <div class="blog-participant-registration-item">
+                        <i class="fa-solid fa-user-check"></i>
+                        <div>
+                            <span class="blog-participant-registration-label">Tanggal Verifikasi</span>
+                            <span class="blog-participant-registration-value">{{ participant.updated_at|date:"d M Y H:i" }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <aside class="blog-participant-brand-card blog-card">
+            <div class="blog-participant-brand-profile">
+                {% if brand.logo %}
+                    <img src="{{ brand.logo }}"
+                         alt="{{ brand.name }}"
+                         class="blog-participant-brand-logo">
+                {% else %}
+                    <div class="avatar-text avatar-blue blog-participant-brand-logo-placeholder">{{ brand.name|slice:":2"|upper }}</div>
+                {% endif %}
+                <div>
+                    <h2 class="blog-participant-brand-name">{{ brand.name }}</h2>
+                    <p class="blog-participant-brand-desc">{{ brand.description|default:"Penyelenggara lomba" }}</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+{% endblock %}

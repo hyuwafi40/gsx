@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Advertisement{% endblock %}
+{% block heading %}Advertisement{% endblock %}
+{% block subheading %}Kelola iklan dan promosi{% endblock %}
+{% block content %}
+    {% include "core/ads/hero.html" %}
+    {% include "core/ads/control.html" %}
+    <div id="adsTableContainer">{% include "core/ads/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="formModalContainer">
+        {% if show_form_modal %}
+            {% include "core/ads/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/ads.css' %}">
+{% endblock %}

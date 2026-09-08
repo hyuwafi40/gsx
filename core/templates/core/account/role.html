@@ -1,0 +1,18 @@
+{% if user_role == "developer" and not account.is_superuser %}
+    <select class="input-control"
+            name="role"
+            hx-post="{% url 'core:account_role_update' account.pk %}"
+            hx-target="#role-{{ account.pk }}"
+            hx-swap="outerHTML"
+            hx-trigger="change">
+        <option value="administrator"
+                {% if account.is_staff and not account.is_superuser %}selected{% endif %}>Administrator</option>
+        <option value="reguler"
+                {% if account.is_active and not account.is_staff %}selected{% endif %}>Reguler</option>
+        <option value="nonactive" {% if not account.is_active %}selected{% endif %}>Nonactive</option>
+    </select>
+{% else %}
+    <span class="status-badge {% if account.is_superuser %}status-active{% elif account.is_staff %}status-pending{% elif account.is_active %}status-active{% else %}status-inactive{% endif %}">
+        {% if account.is_superuser %}Developer{% elif account.is_staff %}Administrator{% elif account.is_active %}Reguler{% else %}Nonactive{% endif %}
+    </span>
+{% endif %}

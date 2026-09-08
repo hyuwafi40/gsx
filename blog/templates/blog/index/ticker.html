@@ -1,0 +1,25 @@
+{% if headline_articles %}
+    <div class="blog-ticker-wrapper">
+        <section class="blog-ticker" aria-labelledby="blogTickerTitle">
+            <div class="blog-ticker-label">
+                <span class="blog-ticker-live-dot"></span>
+                <span id="blogTickerTitle">Kabar terkini</span>
+            </div>
+            <div class="blog-ticker-track">
+                <div class="blog-ticker-content">
+                    {% for article in headline_articles %}
+                        <a href="{% url 'blog:article_detail' article.slug %}"
+                           class="blog-ticker-item"><span>Berita utama</span>{{ article.title }}</a>
+                    {% endfor %}
+                    <span aria-hidden="true">
+                        {% for article in headline_articles %}
+                            <a href="{% url 'blog:article_detail' article.slug %}"
+                               class="blog-ticker-item"
+                               tabindex="-1"><span>Berita utama</span>{{ article.title }}</a>
+                        {% endfor %}
+                    </span>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endif %}

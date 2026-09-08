@@ -1,0 +1,20 @@
+<div class="card glass mb-20">
+    <div class="ads-control">
+        <form hx-get="{% url 'core:article_list' %}"
+              hx-target="#articleTableContainer"
+              hx-swap="innerHTML"
+              class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text"
+                   name="q"
+                   class="search-input"
+                   placeholder="Cari artikel..."
+                   value="{{ query }}">
+        </form>
+        {% if user_role == "developer" or user_role == "administrator" %}
+            <a href="{% url 'core:article_create' %}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Tambah
+            </a>
+        {% endif %}
+    </div>
+</div>

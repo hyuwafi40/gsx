@@ -1,0 +1,41 @@
+<div class="photo-grid">
+    {% for photo in page_obj %}
+        <div class="photo-card glass">
+            {% if photo.image %}
+                <img src="{{ photo.image }}" alt="{{ photo.name }}" class="photo-image">
+            {% else %}
+                <div class="photo-placeholder">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+            {% endif %}
+            <div class="photo-info">
+                <span class="photo-name">{{ photo.name }}</span>
+                <span class="photo-caption">{{ photo.caption|default:"-" }}</span>
+            </div>
+            <div class="flex gap-5">
+                {% if user_role == "developer" or user_role == "administrator" %}
+                    <button type="button"
+                            hx-get="{% url 'core:photo_update' photo.pk %}"
+                            hx-target="#photoFormModalContainer"
+                            hx-swap="innerHTML"
+                            class="action-icon"
+                            aria-label="Edit">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                {% endif %}
+                {% if user_role == "developer" %}
+                    <button type="button"
+                            data-delete-url="{% url 'core:photo_delete' photo.pk %}"
+                            data-name="{{ photo.name }}"
+                            class="action-icon delete-btn"
+                            aria-label="Delete">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty-photo">Belum ada foto dalam album ini.</div>
+    {% endfor %}
+</div>
+{% include "core/base/pagination.html" %}

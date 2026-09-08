@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Participant{% endblock %}
+{% block heading %}Participant{% endblock %}
+{% block subheading %}Kelola data peserta{% endblock %}
+{% block content %}
+    {% include "core/participant/hero.html" %}
+    {% include "core/participant/control.html" %}
+    <div id="participantTableContainer">{% include "core/participant/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/participant.js' %}"></script>
+{% endblock %}

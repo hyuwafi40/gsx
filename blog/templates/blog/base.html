@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{{ blog_brand_name|default:"ApexUI" }}{% endblock %}</title>
+        <link rel="canonical" href="{{ request.build_absolute_uri }}">
+        {% block meta %}{% endblock %}
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+              rel="stylesheet">
+        <script src="{% static 'js/htmx.min.js' %}" defer></script>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <a class="blog-skip-link" href="#main-content">Lewati ke konten</a>
+        {% include "blog/base/navbar.html" %}
+        {% block before_main %}{% endblock %}
+        <main class="blog-main" id="main-content">
+            {% block content %}{% endblock %}
+        </main>
+        {% block after_main %}{% endblock %}
+        {% include "blog/base/footer.html" %}
+        <script src="{% static 'js/blog.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

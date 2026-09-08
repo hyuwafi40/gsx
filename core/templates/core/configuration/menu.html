@@ -1,0 +1,15 @@
+<div class="card glass mb-20">
+    <div class="card-header">
+        <span class="card-title"><i class="fa-solid fa-folder-tree"></i> Menu Integrasi</span>
+    </div>
+    <ul class="nav-menu">
+        {% for item in menu_items %}
+            <li>
+                <a href="{{ item.url }}"
+                   class="nav-link {% if item.active %}active{% endif %}">
+                    <i class="fa-solid {{ item.icon }}"></i><span>{{ item.label }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

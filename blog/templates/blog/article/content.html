@@ -1,0 +1,51 @@
+{% if page_obj %}
+    {% if leaderboard_ad %}
+        {% include "blog/advertisement/slot.html" with ad=leaderboard_ad %}
+    {% endif %}
+    <div class="blog-latest-list">
+        {% for article in page_obj %}
+            <article class="blog-card horizontal">
+                <a href="{% url 'blog:article_detail' article.slug %}"
+                   class="blog-card-media">
+                    {% if article.thumbnail %}
+                        <img src="{{ article.thumbnail }}"
+                             alt="{{ article.title }}"
+                             loading="lazy">
+                    {% else %}
+                        <div class="blog-card-media-placeholder">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                    {% endif %}
+                </a>
+                <div class="blog-card-body">
+                    <h3><a href="{% url 'blog:article_detail' article.slug %}">{{ article.title }}</a></h3>
+                    <div class="blog-card-meta">
+                        {% if article.category %}
+                            <span class="blog-card-category">{{ article.category.name }}</span>
+                        {% endif %}
+                        <span class="blog-card-date">{{ article.created_at|date:"d M Y" }}</span>
+                    </div>
+                    <p>{{ article.content|striptags|truncatechars:160 }}</p>
+                    <a href="{% url 'blog:article_detail' article.slug %}"
+                       class="blog-card-read">Baca selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+            {% if forloop.counter == 2 and native_ad %}
+                <article class="blog-card blog-ad-slot--native">
+                    <a href="{{ native_ad.link }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="blog-card-media">
+                        <img src="{{ native_ad.image }}" alt="{{ native_ad.name }}" loading="lazy">
+                    </a>
+                </article>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if mobile_banner_ad %}
+        {% include "blog/advertisement/slot.html" with ad=mobile_banner_ad %}
+    {% endif %}
+    {% include "blog/base/pagination.html" %}
+{% else %}
+    <p class="text-muted">Belum ada artikel.</p>
+{% endif %}

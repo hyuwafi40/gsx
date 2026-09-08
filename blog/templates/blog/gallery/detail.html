@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}{{ photo.name }} - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description" content="{{ photo.caption|default:photo.name }}">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-photo-detail">
+        <a href="{% url 'blog:photo_list' album.slug %}"
+           class="blog-btn-ghost-light mb-20">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Album
+        </a>
+        <article class="blog-photo-detail-card blog-card">
+            <div class="blog-photo-detail-media">
+                {% if photo.image %}
+                    <img src="{{ photo.image }}" alt="{{ photo.name }}" loading="lazy">
+                {% else %}
+                    <div class="blog-card-media-placeholder">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="blog-card-body">
+                <h1 class="blog-photo-detail-title">{{ photo.name }}</h1>
+                {% if photo.caption %}
+                    <p class="blog-photo-detail-caption">{{ photo.caption }}</p>
+                {% endif %}
+                <div class="blog-card-meta">
+                    <span class="blog-card-date">{{ photo.created_at|date:"d M Y" }}</span>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock %}

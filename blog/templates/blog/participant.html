@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}Peserta - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="Daftar peserta terverifikasi di {{ blog_brand_name|default:"ApexUI" }}.">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/blogparticipant.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-participant-toolbar">
+        <a href="{% url 'blog:participant_search' %}"
+           class="blog-btn blog-btn-ghost-light">
+            <i class="fa-solid fa-magnifying-glass"></i> Cari Peserta
+        </a>
+    </div>
+    {% include "blog/participant/summary.html" %}
+    <div id="participantTableContainer">{% include "blog/participant/table.html" %}</div>
+{% endblock %}

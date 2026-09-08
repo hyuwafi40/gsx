@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        {% block meta %}{% endblock %}
+        {% block head_assets %}
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <link rel="stylesheet"
+                  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+            <script src="{% static 'js/htmx.min.js' %}" defer></script>
+            <link rel="stylesheet" href="{% static 'css/core.css' %}">
+        {% endblock %}
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body {% block body_attrs %}{% endblock %}>
+        <div class="aurora-bg">
+            <div class="aurora-blob aurora-1"></div>
+            <div class="aurora-blob aurora-2"></div>
+            <div class="aurora-blob aurora-3"></div>
+        </div>
+        {% include "core/base/toast.html" %}
+        <div class="overlay" id="overlay" aria-hidden="true"></div>
+        <div class="app-layout">
+            {% include "core/base/sidebar.html" %}
+            <div class="main-wrapper">
+                {% include "core/base/navbar.html" %}
+                {% block before_content %}{% endblock %}
+                <main class="content">
+                    {% block page_header %}
+                        {% block breadcrumb %}
+                            <nav aria-label="breadcrumb" class="breadcrumb">
+                                {% for item in breadcrumbs %}
+                                    {% if not forloop.last %}
+                                        <a href="{{ item.url }}">{{ item.label }}</a>
+                                        <i class="fa-solid fa-chevron-right page-icon"></i>
+                                    {% else %}
+                                        <span>{{ item.label }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </nav>
+                        {% endblock %}
+                        <div class="header-title">
+                            <h1>{% block heading %}Dashboard{% endblock %}</h1>
+                            <p>
+                                {% block subheading %}{% endblock %}
+                            </p>
+                        </div>
+                    {% endblock %}
+                    {% block content %}{% endblock %}
+                </main>
+                {% block after_content %}{% endblock %}
+                {% include "core/base/footer.html" %}
+            </div>
+        </div>
+        {% block modal %}{% endblock %}
+        <script src="{% static 'js/core.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

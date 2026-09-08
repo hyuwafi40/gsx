@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}{{ album.name }} - Galeri - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="Foto dalam album {{ album.name }} di {{ blog_brand_name|default:"ApexUI" }}.">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-section-heading">
+        <span class="blog-section-eyebrow">Album</span>
+        <h2 class="blog-section-title"><i class="fa-solid fa-folder-open"></i> {{ album.name }}</h2>
+    </div>
+    <a href="{% url 'blog:album_list' %}" class="blog-btn-ghost-light mb-20">
+        <i class="fa-solid fa-arrow-left"></i> Semua Album
+    </a>
+    <div class="blog-photo-grid">
+        {% for photo in photo_obj %}
+            <article class="blog-photo-card blog-card">
+                <a href="{% url 'blog:photo_detail' album.slug photo.slug %}"
+                   class="blog-card-media">
+                    {% if photo.image %}
+                        <img src="{{ photo.image }}" alt="{{ photo.name }}" loading="lazy">
+                    {% else %}
+                        <div class="blog-card-media-placeholder">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                    {% endif %}
+                </a>
+                <div class="blog-card-body">
+                    <h3><a href="{% url 'blog:photo_detail' album.slug photo.slug %}">{{ photo.name }}</a></h3>
+                    {% if photo.caption %}
+                        <p>{{ photo.caption }}</p>
+                    {% endif %}
+                </div>
+            </article>
+        {% empty %}
+            <p class="text-muted">Belum ada foto dalam album ini.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

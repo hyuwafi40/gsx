@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}{{ article.title }} - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/article.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ads.css' %}">
+{% endblock %}
+{% block content %}
+    <article class="blog-article-detail">
+        <header class="blog-article-header">
+            <div class="blog-card-meta">
+                {% if article.category %}
+                    <span class="blog-card-category">{{ article.category.name }}</span>
+                {% endif %}
+                <span class="blog-card-date">{{ article.created_at|date:"d M Y" }}</span>
+            </div>
+            <h1 class="blog-article-title">{{ article.title }}</h1>
+            {% if article.thumbnail %}
+                <img src="{{ article.thumbnail }}"
+                     alt="{{ article.title }}"
+                     class="blog-article-thumbnail">
+            {% endif %}
+        </header>
+        <div class="blog-article-content">{{ article.content|safe }}</div>
+        {% if article.tag.exists %}
+            <div class="blog-article-tags">
+                {% for tag in article.tag.all %}
+                    <span class="blog-card-category">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </article>
+    {% if rectangle_ad %}
+        {% include "blog/advertisement/slot.html" with ad=rectangle_ad %}
+    {% endif %}
+    {% if banner_ad %}
+        {% include "blog/advertisement/slot.html" with ad=banner_ad %}
+    {% endif %}
+    {% if mobile_banner_ad %}
+        {% include "blog/advertisement/slot.html" with ad=mobile_banner_ad %}
+    {% endif %}
+    <section class="blog-comments" id="comments-section">
+        <div class="blog-section-heading">
+            <span class="blog-section-eyebrow">Diskusi</span>
+            <h2 class="blog-section-title"><i class="fa-solid fa-comments"></i> Komentar</h2>
+        </div>
+        {% include "blog/article/comments.html" %}
+    </section>
+{% endblock %}

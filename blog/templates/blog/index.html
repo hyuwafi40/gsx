@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ blog_brand_name|default:"ApexUI" }} - Beranda{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="{{ blog_brand_description|default:"Situs berita dan informasi terkini." }}">
+    <meta name="keywords"
+          content="berita, artikel, informasi, {{ blog_brand_name|default:"ApexUI" }}">
+    <meta property="og:title"
+          content="{{ blog_brand_name|default:"ApexUI" }} - Beranda">
+    <meta property="og:description"
+          content="{{ blog_brand_description|default:"Situs berita dan informasi terkini." }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% if blog_brand_logo %}
+        <meta property="og:image" content="{{ blog_brand_logo }}">
+    {% endif %}
+{% endblock %}
+{% block before_main %}
+    <div class="blog-featured-stage">
+        {% include "blog/index/hero.html" %}
+        {% include "blog/index/carousel.html" %}
+    </div>
+{% endblock %}
+{% block content %}
+    {% include "blog/index/ticker.html" %}
+    {% include "blog/index/headlines.html" %}
+    {% include "blog/index/tables.html" %}
+{% endblock %}

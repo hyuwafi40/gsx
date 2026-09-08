@@ -1,0 +1,16 @@
+{% if user_role == "developer" or user_role == "administrator" %}
+    <select class="input-control"
+            name="status"
+            hx-post="{% url 'core:album_status_update' album.pk %}"
+            hx-target="#album-status-{{ album.pk }}"
+            hx-swap="outerHTML"
+            hx-trigger="change">
+        <option value="draft" {% if album.status == 'draft' %}selected{% endif %}>Draft</option>
+        <option value="published"
+                {% if album.status == 'published' %}selected{% endif %}>Published</option>
+    </select>
+{% else %}
+    <span class="status-badge {% if album.status == 'published' %}status-active{% else %}status-pending{% endif %}">
+        {{ album.get_status_display }}
+    </span>
+{% endif %}

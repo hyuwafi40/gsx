@@ -1,0 +1,35 @@
+.brand-logo-preview {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--rad-md);
+    object-fit: cover;
+    border: 2px solid var(--glass-border);
+    margin-bottom: 12px;
+}
+
+.brand-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.brand-social-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-dark);
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-ios);
+}
+
+.brand-social-icon:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}

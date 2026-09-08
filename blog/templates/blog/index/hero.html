@@ -1,0 +1,33 @@
+<section class="blog-hero fullwidth" aria-labelledby="blogHeroTitle">
+    <div class="blog-hero-content">
+        <div class="blog-hero-text">
+            <div class="blog-hero-kicker">
+                <span class="blog-hero-kicker-line"></span>
+                <span>Berita dan informasi</span>
+            </div>
+            <h1 class="blog-hero-title" id="blogHeroTitle">{{ blog_brand_name|default:"ApexUI" }}</h1>
+            <p class="blog-hero-desc">{{ blog_brand_description|default:"Temukan berita terbaru dan inspirasi setiap hari." }}</p>
+            <div class="blog-hero-actions">
+                <a href="{% url 'blog:article_list' %}"
+                   class="blog-btn blog-btn-primary">Mulai jelajah <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="{{ blog_registration_url }}"
+                   class="blog-btn blog-btn-ghost"
+                   target="_blank"
+                   rel="noopener noreferrer">Daftar <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+        </div>
+        <div class="blog-hero-visual">
+            <div class="blog-hero-orbit" aria-hidden="true"></div>
+            <div class="blog-hero-mark">
+                {% if blog_brand_logo %}
+                    <img src="{{ blog_brand_logo }}" alt="" class="blog-hero-logo">
+                {% else %}
+                    <i class="fa-solid fa-cube blog-hero-logo-fallback"></i>
+                {% endif %}
+            </div>
+            <span class="blog-hero-stamp">Sejak
+                <br>
+            aktif</span>
+        </div>
+    </div>
+</section>

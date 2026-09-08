@@ -1,0 +1,55 @@
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Panggung</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter|add:page_obj.start_index|add:"-1" }}</td>
+                    <td>{{ participant.stage_name }}</td>
+                    <td>{{ participant.email }}</td>
+                    <td>
+                        <div id="status-{{ participant.pk }}">{% include "core/participant/status.html" %}</div>
+                    </td>
+                    <td>
+                        <div class="flex gap-5">
+                            <a href="{% url 'core:participant_detail' participant.pk %}"
+                               class="action-icon"
+                               aria-label="Lihat">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            {% if user_role == "developer" or user_role == "administrator" %}
+                                <a href="{% url 'core:participant_update' participant.pk %}"
+                                   class="action-icon"
+                                   aria-label="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            {% endif %}
+                            {% if user_role == "developer" %}
+                                <button type="button"
+                                        data-delete-url="{% url 'core:participant_delete' participant.pk %}"
+                                        data-name="{{ participant.stage_name }}"
+                                        class="action-icon delete-btn"
+                                        aria-label="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Tidak ada data participant.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "core/base/pagination.html" %}

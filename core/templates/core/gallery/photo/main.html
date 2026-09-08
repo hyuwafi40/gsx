@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}{{ album.name }} - Photos{% endblock %}
+{% block heading %}{{ album.name }}{% endblock %}
+{% block subheading %}{{ album.description|default:"Kelola foto dalam album" }}{% endblock %}
+{% block content %}
+    <div class="card glass mb-20">
+        <div class="ads-control">
+            <a href="{% url 'core:album_list' %}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+            {% if user_role == "developer" or user_role == "administrator" %}
+                <button type="button"
+                        hx-get="{% url 'core:photo_create' album.pk %}"
+                        hx-target="#photoFormModalContainer"
+                        hx-swap="innerHTML"
+                        class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Tambah Foto
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div id="photoFormModalContainer"></div>
+    <div id="photoGridContainer">{% include "core/gallery/photo/card.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

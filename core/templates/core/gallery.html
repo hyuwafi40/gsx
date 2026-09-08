@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Gallery{% endblock %}
+{% block heading %}Gallery{% endblock %}
+{% block subheading %}Kelola album dan foto{% endblock %}
+{% block content %}
+    {% include "core/gallery/hero.html" %}
+    {% include "core/gallery/control.html" %}
+    <div id="albumTableContainer">{% include "core/gallery/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="formModalContainer">
+        {% if show_form_modal %}
+            {% include "core/gallery/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

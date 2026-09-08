@@ -1,0 +1,17 @@
+{% if user_role == "developer" or user_role == "administrator" %}
+    <label class="switch">
+        <input type="checkbox"
+               class="switch-input"
+               {% if participant.status == 'verified' %}checked{% endif %}
+               hx-post="{% url 'core:participant_status_update' participant.pk %}"
+               hx-target="#status-{{ participant.pk }}"
+               hx-swap="outerHTML"
+               hx-trigger="change"
+               hx-vals='{"status": "{% if participant.status == 'verified' %}registered{% else %}verified{% endif %}"}'>
+        <span class="slider"></span>
+    </label>
+{% else %}
+    <span class="status-badge {% if participant.status == 'verified' %}status-active{% else %}status-pending{% endif %}">
+        {{ participant.get_status_display }}
+    </span>
+{% endif %}

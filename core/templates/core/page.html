@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Page{% endblock %}
+{% block heading %}Page{% endblock %}
+{% block subheading %}Kelola halaman statis{% endblock %}
+{% block content %}
+    {% include "core/page/hero.html" %}
+    {% include "core/page/control.html" %}
+    <div id="pageTableContainer">{% include "core/page/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}

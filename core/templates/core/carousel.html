@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+{% block title %}Carousel{% endblock %}
+{% block heading %}Carousel{% endblock %}
+{% block subheading %}Kelola carousel banner{% endblock %}
+{% block content %}
+    {% include "core/carousel/hero.html" %}
+    {% include "core/carousel/control.html" %}
+    <div id="carouselTableContainer">{% include "core/carousel/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="carouselModalContainer">
+        {% if show_form_modal %}
+            {% include "core/carousel/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}

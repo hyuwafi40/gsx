@@ -1,0 +1,173 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Detail Participant{% endblock %}
+{% block heading %}Detail Participant{% endblock %}
+{% block subheading %}{{ participant.stage_name }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/participant.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="participant-profile">
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title"><i class="fa-solid fa-id-badge"></i> Profil Peserta</span>
+            </div>
+            <div class="profile-main">
+                {% if participant.photo_selfie %}
+                    <img src="{{ participant.photo_selfie }}"
+                         alt="{{ participant.stage_name }}"
+                         class="profile-photo">
+                {% else %}
+                    <div class="avatar-text avatar-blue profile-placeholder">{{ participant.name|slice:":2"|upper }}</div>
+                {% endif %}
+                <div class="profile-info">
+                    <h2 class="profile-name">{{ participant.stage_name }}</h2>
+                    <p class="profile-realname">{{ participant.name }}</p>
+                    <span class="status-badge {% if participant.status == 'verified' %}status-active{% else %}status-pending{% endif %}">
+                        {{ participant.get_status_display }}
+                    </span>
+                </div>
+            </div>
+            <div class="profile-actions">
+                {% if user_role == "developer" or user_role == "administrator" %}
+                    <a href="{% url 'core:participant_update' participant.pk %}"
+                       class="btn btn-primary">
+                        <i class="fa-solid fa-pen"></i> Edit
+                    </a>
+                {% endif %}
+                <a href="{% url 'core:participant_list' %}" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+        </div>
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title"><i class="fa-solid fa-user"></i> Informasi Pribadi</span>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fa-solid fa-id-card"></i>
+                    <div>
+                        <span class="info-label">NIK</span>
+                        <span class="info-value">{{ participant.nik }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-cake-candles"></i>
+                    <div>
+                        <span class="info-label">Tanggal Lahir</span>
+                        <span class="info-value">{{ participant.birthdate|date:"d M Y" }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-venus-mars"></i>
+                    <div>
+                        <span class="info-label">Gender</span>
+                        <span class="info-value">{{ participant.get_gender_display }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <span class="info-label">WhatsApp</span>
+                        <span class="info-value">{{ participant.whatsapp }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <span class="info-label">Wilayah</span>
+                        <span class="info-value">{{ participant.region }}</span>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{ participant.email }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="grid-2">
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title"><i class="fa-solid fa-image"></i> Foto & Dokumen</span>
+            </div>
+            <div class="docs-grid">
+                {% if participant.photo_close %}
+                    <div class="doc-card">
+                        <span class="doc-label">Foto Close Up</span>
+                        <img src="{{ participant.photo_close }}" alt="Close Up" class="doc-image">
+                    </div>
+                {% endif %}
+                {% if participant.invoice %}
+                    <div class="doc-card">
+                        <span class="doc-label">Invoice</span>
+                        <a href="{{ participant.invoice }}"
+                           target="_blank"
+                           class="btn btn-secondary">
+                            <i class="fa-solid fa-file-invoice"></i> Lihat Dokumen
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title"><i class="fa-solid fa-hashtag"></i> Sosial Media</span>
+            </div>
+            <div class="social-list">
+                {% if participant.instagram %}
+                    <a href="{{ participant.instagram }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-link social-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                {% endif %}
+                {% if participant.tiktok %}
+                    <a href="{{ participant.tiktok }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-link social-tiktok">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
+                {% endif %}
+                {% if participant.facebook %}
+                    <a href="{{ participant.facebook }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="social-link social-facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="card glass mt-20">
+        <div class="card-header">
+            <span class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Informasi Pendaftaran</span>
+        </div>
+        <div class="info-grid">
+            <div class="info-item">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <div>
+                    <span class="info-label">Tanggal Daftar</span>
+                    <span class="info-value">{{ participant.created_at|date:"d M Y H:i" }}</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <div>
+                    <span class="info-label">Terakhir Diperbarui</span>
+                    <span class="info-value">{{ participant.updated_at|date:"d M Y H:i" }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

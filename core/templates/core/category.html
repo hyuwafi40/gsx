@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Category{% endblock %}
+{% block heading %}Category{% endblock %}
+{% block subheading %}Kelola kategori konten{% endblock %}
+{% block content %}
+    {% include "core/category/hero.html" %}
+    {% include "core/category/control.html" %}
+    <div id="categoryTableContainer">{% include "core/category/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="formModalContainer">
+        {% if show_form_modal %}
+            {% include "core/category/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}

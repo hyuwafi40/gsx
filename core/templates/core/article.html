@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Article{% endblock %}
+{% block heading %}Article{% endblock %}
+{% block subheading %}Kelola artikel dan konten{% endblock %}
+{% block content %}
+    {% include "core/article/hero.html" %}
+    {% include "core/article/control.html" %}
+    <div id="articleTableContainer">{% include "core/article/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}

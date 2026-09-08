@@ -1,0 +1,19 @@
+<header class="navbar glass">
+    <div class="navbar-left">
+        <button type="button"
+                class="btn-toggle"
+                id="btnToggle"
+                aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="navbar-heading">{{ navbar_heading }}</span>
+    </div>
+    <div class="navbar-right">
+        <a href="{% url 'logout' %}"
+           class="action-icon logout-btn"
+           aria-label="Logout">
+            <i class="fa-solid fa-sign-out-alt"></i>
+        </a>
+        <div class="avatar-text navbar-avatar">{{ sidebar_user.initials }}</div>
+    </div>
+</header>

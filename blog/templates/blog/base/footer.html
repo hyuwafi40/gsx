@@ -1,0 +1,69 @@
+<footer class="blog-footer">
+    <div class="blog-footer-inner">
+        <div class="blog-footer-grid">
+            <div class="blog-footer-col">
+                <a href="{% url 'blog:index' %}" class="blog-footer-brand">{{ blog_brand_name|default:"ApexUI" }}</a>
+                <p class="blog-footer-desc">{{ blog_brand_description|default:"Menyajikan informasi terkini dan inspirasi untuk Anda." }}</p>
+            </div>
+            <div class="blog-footer-col">
+                <h2 class="blog-footer-title">Halaman</h2>
+                <ul class="blog-footer-links">
+                    <li><a href="{% url 'blog:article_list' %}" class="blog-footer-link">Berita</a></li>
+                    <li><a href="{% url 'blog:album_list' %}" class="blog-footer-link">Galeri</a></li>
+                    {% for page in blog_footer_pages %}
+                        <li><a href="{% url 'blog:page_detail' page.slug %}"
+   class="blog-footer-link">{{ page.title }}</a></li>
+                    {% empty %}
+                        <li><a href="{% url 'blog:index' %}" class="blog-footer-link">Beranda</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if blog_social_links.facebook or blog_social_links.instagram or blog_social_links.tiktok or blog_social_links.youtube %}
+                <div class="blog-footer-col">
+                    <h2 class="blog-footer-title">Ikuti Kami</h2>
+                    <div class="blog-footer-social">
+                        {% if blog_social_links.facebook %}
+                            <a href="{{ blog_social_links.facebook }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="social-icon social-facebook"
+                               aria-label="Facebook">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        {% endif %}
+                        {% if blog_social_links.instagram %}
+                            <a href="{{ blog_social_links.instagram }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="social-icon social-instagram"
+                               aria-label="Instagram">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        {% endif %}
+                        {% if blog_social_links.tiktok %}
+                            <a href="{{ blog_social_links.tiktok }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="social-icon social-tiktok"
+                               aria-label="TikTok">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </a>
+                        {% endif %}
+                        {% if blog_social_links.youtube %}
+                            <a href="{{ blog_social_links.youtube }}"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="social-icon social-youtube"
+                               aria-label="YouTube">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="blog-footer-bottom">
+            <p>© {{ blog_current_year }} {{ blog_brand_name|default:"ApexUI" }}. Hak cipta dilindungi.</p>
+        </div>
+    </div>
+</footer>

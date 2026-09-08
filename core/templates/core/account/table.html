@@ -1,0 +1,55 @@
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter|add:page_obj.start_index|add:"-1" }}</td>
+                    <td>{{ account.username }}</td>
+                    <td>{{ account.get_full_name|default:"-" }}</td>
+                    <td>{{ account.email|default:"-" }}</td>
+                    <td>
+                        <div id="role-{{ account.pk }}">{% include "core/account/role.html" %}</div>
+                    </td>
+                    <td>
+                        <div class="flex gap-5">
+                            {% if user_role == "developer" or user_role == "administrator" %}
+                                <button type="button"
+                                        hx-get="{% url 'core:account_update' account.pk %}"
+                                        hx-target="#formModalContainer"
+                                        hx-swap="innerHTML"
+                                        class="action-icon"
+                                        aria-label="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            {% endif %}
+                            {% if user_role == "developer" and account != request.user %}
+                                <button type="button"
+                                        data-delete-url="{% url 'core:account_delete' account.pk %}"
+                                        data-name="{{ account.username }}"
+                                        class="action-icon delete-btn"
+                                        aria-label="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">Tidak ada data akun.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "core/base/pagination.html" %}

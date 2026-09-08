@@ -1,0 +1,47 @@
+{% if query %}
+    {% if page_obj.object_list %}
+        <div class="blog-participant-list">
+            {% for participant in page_obj %}
+                {% if participant.status == "verified" %}
+                    <article class="blog-participant-item blog-card">
+                        <div class="blog-participant-item-media">
+                            {% if participant.photo_selfie %}
+                                <img src="{{ participant.photo_selfie }}"
+                                     alt="{{ participant.stage_name }}"
+                                     loading="lazy">
+                            {% else %}
+                                <div class="blog-card-media-placeholder">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="blog-participant-item-body">
+                            <h3>{{ participant.stage_name }}</h3>
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">{{ participant.get_gender_display|default:"-" }}</span>
+                                <span class="blog-card-date">{{ participant.region|default:"-" }}</span>
+                            </div>
+                            <span class="status-badge status-active">Terverifikasi</span>
+                        </div>
+                        <a href="{% url 'blog:participant_detail' participant.pk %}"
+                           class="blog-btn blog-btn-primary">Lihat</a>
+                    </article>
+                {% else %}
+                    <article class="blog-participant-item blog-card">
+                        <div class="blog-participant-item-body">
+                            <h3>{{ participant.stage_name }}</h3>
+                            <div class="blog-card-meta">
+                                <span class="blog-card-category">Dalam proses verifikasi</span>
+                            </div>
+                        </div>
+                    </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% include "blog/base/pagination.html" %}
+    {% else %}
+        <p class="text-muted">Peserta tidak ditemukan.</p>
+    {% endif %}
+{% else %}
+    <p class="text-muted">Silakan ketik kata kunci untuk mencari peserta.</p>
+{% endif %}

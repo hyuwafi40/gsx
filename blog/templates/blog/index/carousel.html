@@ -1,0 +1,39 @@
+{% if carousel_items %}
+    <section class="blog-carousel fullwidth"
+             id="blogCarousel"
+             tabindex="0"
+             role="region"
+             aria-roledescription="carousel"
+             aria-label="Pilihan unggulan">
+        <div class="blog-carousel-track">
+            {% for item in carousel_items %}
+                <article class="blog-carousel-slide"
+                         role="group"
+                         aria-roledescription="slide"
+                         aria-label="Pilihan {{ forloop.counter }} dari {{ carousel_items|length }}">
+                    <img src="{{ item.image }}"
+                         alt="{{ item.name }}"
+                         {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                    <div class="blog-carousel-overlay">
+                        <span class="blog-carousel-label">Pilihan unggulan</span>
+                        <h2>{{ item.name }}</h2>
+                        <a href="#berita" class="blog-carousel-btn">Lihat headline <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+        <button type="button"
+                class="blog-carousel-arrow prev"
+                id="carouselPrev"
+                aria-label="Pilihan sebelumnya">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button type="button"
+                class="blog-carousel-arrow next"
+                id="carouselNext"
+                aria-label="Pilihan berikutnya">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="blog-carousel-dots" id="carouselDots"></div>
+    </section>
+{% endif %}

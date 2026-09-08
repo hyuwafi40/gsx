@@ -1,0 +1,58 @@
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Important</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter|add:page_obj.start_index|add:"-1" }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>
+                        <span class="status-badge {% if article.status == 'published' %}status-active{% else %}status-pending{% endif %}">
+                            {{ article.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if article.is_important %}
+                            <i class="fa-solid fa-circle-check" style="color: var(--success);"></i>
+                        {% else %}
+                            <i class="fa-solid fa-circle-xmark" style="color: var(--danger);"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="flex gap-5">
+                            {% if user_role == "developer" or user_role == "administrator" %}
+                                <a href="{% url 'core:article_update' article.pk %}"
+                                   class="action-icon"
+                                   aria-label="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            {% endif %}
+                            {% if user_role == "developer" %}
+                                <button type="button"
+                                        data-delete-url="{% url 'core:article_delete' article.pk %}"
+                                        data-name="{{ article.title }}"
+                                        class="action-icon delete-btn"
+                                        aria-label="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">Tidak ada data artikel.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "core/base/pagination.html" %}

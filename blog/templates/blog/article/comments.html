@@ -1,0 +1,42 @@
+<div class="blog-comments-section">
+    <div class="blog-comments-list">
+        {% for comment in comments %}
+            <article class="blog-comment">
+                <div class="blog-comment-header">
+                    <div class="blog-comment-author">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <strong>{{ comment.name }}</strong>
+                    </div>
+                    <span class="blog-comment-date">{{ comment.created_at|date:"d M Y H:i" }}</span>
+                </div>
+                <p class="blog-comment-content">{{ comment.content }}</p>
+            </article>
+        {% empty %}
+            <p class="text-muted">Belum ada komentar. Jadilah yang pertama berkomentar.</p>
+        {% endfor %}
+    </div>
+    <form method="post"
+          action="{% url 'blog:comment_create' article.slug %}"
+          hx-post="{% url 'blog:comment_create' article.slug %}"
+          hx-target="#comments-section"
+          hx-swap="outerHTML"
+          class="blog-comment-form">
+        {% csrf_token %}
+        <div class="form-field">
+            <label for="{{ form.name.id_for_label }}" class="form-label">Nama</label>
+            {{ form.name }}
+            {% if form.name.errors %}<div class="field-error">{{ form.name.errors }}</div>{% endif %}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}<div class="field-error">{{ form.email.errors }}</div>{% endif %}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.content.id_for_label }}" class="form-label">Komentar</label>
+            {{ form.content }}
+            {% if form.content.errors %}<div class="field-error">{{ form.content.errors }}</div>{% endif %}
+        </div>
+        <button type="submit" class="blog-btn blog-btn-primary">Kirim Komentar</button>
+    </form>
+</div>

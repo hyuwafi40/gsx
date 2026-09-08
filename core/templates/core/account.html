@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Account{% endblock %}
+{% block heading %}Account{% endblock %}
+{% block subheading %}Kelola akun pengguna{% endblock %}
+{% block content %}
+    {% include "core/account/hero.html" %}
+    {% include "core/account/control.html" %}
+    <div id="accountTableContainer">{% include "core/account/table.html" %}</div>
+{% endblock %}
+{% block modal %}
+    <div id="formModalContainer">
+        {% if show_form_modal %}
+            {% include "core/account/form.html" %}
+        {% endif %}
+    </div>
+    <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/account.js' %}"></script>
+{% endblock %}

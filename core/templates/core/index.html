@@ -1,0 +1,86 @@
+{% extends "core/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block heading %}Dashboard{% endblock %}
+{% block subheading %}Ringkasan data sistem dan aktivitas terbaru{% endblock %}
+{% block content %}
+    <section class="grid-4">
+        {% for card in stats_cards %}
+            <div class="card glass">
+                <div class="card-header">
+                    <span class="card-title">{{ card.label }}</span>
+                    <div class="stat-icon {{ card.icon_class }}">
+                        <i class="fa-solid {{ card.icon }}"></i>
+                    </div>
+                </div>
+                <div class="stat-val">{{ card.value }}</div>
+                {% for change in card.changes %}
+                    <div class="stat-change {{ change.class }}"><i class="fa-solid {{ change.icon }}"></i> {{ change.text }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+    <section class="grid-2">
+        <div class="card glass">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fa-solid fa-user-plus"></i> Recent Participants</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for participant in recent_participants %}
+                            <tr>
+                                <td>{{ participant.stage_name }}</td>
+                                <td>{{ participant.email }}</td>
+                                <td>
+                                    <span class="status-badge {% if participant.status == 'verified' %}status-active{% else %}status-pending{% endif %}">
+                                        {{ participant.get_status_display }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">Belum ada participant</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card glass">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fa-solid fa-newspaper"></i> Recent Articles</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Status</th>
+                            <th>Kategori</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in recent_articles %}
+                            <tr>
+                                <td>{{ article.title }}</td>
+                                <td>{{ article.get_status_display }}</td>
+                                <td>{{ article.category.name|default:"-" }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">Belum ada article</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

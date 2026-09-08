@@ -1,0 +1,32 @@
+<aside class="sidebar glass" id="sidebar" aria-label="Main Navigation">
+    <div class="sidebar-content">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-cube"></i>
+            </div>
+            <span>{{ brand.name|default:"ApexUI" }}</span>
+        </div>
+        <ul class="nav-menu">
+            {% for category in sidebar_menu_categories %}
+                <li class="nav-section-title">{{ category.title }}</li>
+                {% for item in category.items %}
+                    <li>
+                        <a href="{{ item.url }}"
+                           class="nav-link {% if item.active %}active{% endif %}">
+                            <i class="fa-solid {{ item.icon }}"></i><span>{{ item.label }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            {% empty %}
+                <li><span class="nav-link">No menu available</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="sidebar-user">
+        <div class="avatar-text">{{ sidebar_user.initials }}</div>
+        <div class="user-info">
+            <span class="user-name">{{ sidebar_user.full_name }}</span>
+            <span class="user-sub">{{ sidebar_user.role }}</span>
+        </div>
+    </div>
+</aside>

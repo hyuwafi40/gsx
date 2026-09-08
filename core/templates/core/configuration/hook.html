@@ -1,0 +1,37 @@
+<div class="card glass">
+    <div class="card-header">
+        <span class="card-title"><i class="fa-solid fa-plug"></i> Status Sinkronisasi</span>
+    </div>
+    <div class="grid-4">
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title">Total Peserta</span>
+                <div class="stat-icon stat-icon-blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+            <div class="stat-val">{{ stats.total }}</div>
+        </div>
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title">Registered</span>
+                <div class="stat-icon stat-icon-orange">
+                    <i class="fa-solid fa-user-clock"></i>
+                </div>
+            </div>
+            <div class="stat-val">{{ stats.registered }}</div>
+        </div>
+        <div class="card glass">
+            <div class="card-header">
+                <span class="card-title">Verified</span>
+                <div class="stat-icon stat-icon-green">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+            </div>
+            <div class="stat-val">{{ stats.verified }}</div>
+        </div>
+    </div>
+    <p class="user-sub mt-10">
+        <i class="fa-solid fa-clock"></i> Terakhir diperiksa: {{ last_checked|date:"d M Y H:i" }}
+    </p>
+</div>

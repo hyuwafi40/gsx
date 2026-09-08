@@ -1,0 +1,45 @@
+<footer class="footer">
+    {% block footer_content %}
+        <div class="footer-social">
+            {% if social_links.facebook %}
+                <a href="{{ social_links.facebook }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-icon"
+                   aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+            {% endif %}
+            {% if social_links.tiktok %}
+                <a href="{{ social_links.tiktok }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-icon"
+                   aria-label="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+            {% endif %}
+            {% if social_links.instagram %}
+                <a href="{{ social_links.instagram }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-icon"
+                   aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            {% endif %}
+            {% if social_links.youtube %}
+                <a href="{{ social_links.youtube }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-icon"
+                   aria-label="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            {% endif %}
+        </div>
+        <div class="footer-copyright">
+            © {{ current_year }} {{ brand_name|default:"ApexUI" }}.
+        </div>
+    {% endblock %}
+</footer>

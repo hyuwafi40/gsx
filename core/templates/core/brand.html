@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Brand{% endblock %}
+{% block heading %}Brand{% endblock %}
+{% block subheading %}Kelola informasi brand{% endblock %}
+{% block content %}
+    {% if brand %}
+        {% include "core/brand/summary.html" %}
+    {% else %}
+        {% include "core/brand/fallback.html" %}
+    {% endif %}
+{% endblock %}

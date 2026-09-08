@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+{% block title %}Syncronization{% endblock %}
+{% block heading %}Syncronization{% endblock %}
+{% block subheading %}Kelola integrasi data eksternal{% endblock %}
+{% block content %}
+    {% include "core/configuration/hero.html" %}
+    {% include "core/configuration/menu.html" %}
+    <div id="configurationContent">{% include "core/configuration/hook.html" %}</div>
+{% endblock %}

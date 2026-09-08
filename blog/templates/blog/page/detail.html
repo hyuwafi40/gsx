@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}{{ page.title }} - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="{{ page.content|striptags|truncatechars:160 }}">
+{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/page.css' %}">
+{% endblock %}
+{% block content %}
+    <article class="blog-page-detail">
+        <header class="blog-page-header">
+            <h1 class="blog-page-title">{{ page.title }}</h1>
+            <div class="blog-card-meta">
+                <span class="blog-card-date">{{ page.created_at|date:"d M Y" }}</span>
+            </div>
+        </header>
+        <div class="blog-page-content">{{ page.content|safe }}</div>
+    </article>
+{% endblock %}

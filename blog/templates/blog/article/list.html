@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}Artikel - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/ads.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="blog-section-heading">
+        <span class="blog-section-eyebrow">Jelajahi</span>
+        <h2 class="blog-section-title"><i class="fa-solid fa-newspaper"></i> Artikel</h2>
+    </div>
+    <div class="blog-article-controls">
+        <form class="search-bar"
+              method="get"
+              action="{% url 'blog:article_list' %}"
+              hx-get="{% url 'blog:article_list' %}"
+              hx-target="#articleListContainer"
+              hx-swap="innerHTML">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text"
+                   name="q"
+                   class="search-input"
+                   placeholder="Cari artikel..."
+                   value="{{ query|default:'' }}">
+        </form>
+    </div>
+    <div id="articleListContainer">{% include "blog/article/content.html" %}</div>
+{% endblock %}

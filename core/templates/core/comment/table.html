@@ -1,0 +1,52 @@
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Isi Komentar</th>
+                <th>Penulis</th>
+                <th>Email</th>
+                <th>Judul Artikel</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter|add:page_obj.start_index|add:"-1" }}</td>
+                    <td>{{ comment.content|truncatechars:100 }}</td>
+                    <td>{{ comment.name }}</td>
+                    <td>{{ comment.email }}</td>
+                    <td>
+                        <a href="{% url 'blog:article_detail' comment.article.slug %}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="blog-link">{{ comment.article.title|truncatechars:60 }}</a>
+                    </td>
+                    <td>
+                        <div id="comment-status-{{ comment.pk }}">{% include "core/comment/status.html" %}</div>
+                    </td>
+                    <td>
+                        <div class="flex gap-5">
+                            {% if user_role == "developer" %}
+                                <button type="button"
+                                        data-delete-url="{% url 'core:comment_delete' comment.pk %}"
+                                        data-name="{{ comment.name }}"
+                                        class="action-icon delete-btn"
+                                        aria-label="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">Belum ada komentar.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% include "core/base/pagination.html" %}

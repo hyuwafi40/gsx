@@ -1,0 +1,45 @@
+{% if page_obj %}
+    <div class="blog-participant-list">
+        {% for participant in page_obj %}
+            <article class="blog-participant-item blog-card">
+                <span class="blog-participant-item-number">{{ forloop.counter }}</span>
+                <div class="blog-participant-item-media">
+                    {% if participant.photo_selfie %}
+                        <img src="{{ participant.photo_selfie }}"
+                             alt="{{ participant.stage_name }}"
+                             loading="lazy">
+                    {% else %}
+                        <div class="blog-card-media-placeholder">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="blog-participant-item-body">
+                    <h3>{{ participant.stage_name }}</h3>
+                    <div class="blog-participant-meta">
+                        <span><i class="fa-solid fa-venus-mars"></i> {{ participant.get_gender_display|default:"-" }}</span>
+                        <span><i class="fa-solid fa-location-dot"></i> {{ participant.region|default:"-" }}</span>
+                    </div>
+                    {% if participant.status == "verified" %}
+                        <span class="blog-participant-status verified">
+                            <i class="fa-solid fa-circle-check"></i> Terverifikasi
+                        </span>
+                    {% else %}
+                        <span class="blog-participant-status registered">
+                            <i class="fa-solid fa-clock"></i> Dalam proses verifikasi
+                        </span>
+                    {% endif %}
+                </div>
+                {% if participant.status == "verified" %}
+                    <a href="{% url 'blog:participant_detail' participant.pk %}"
+                       class="blog-btn blog-btn-primary">
+                        <i class="fa-solid fa-eye"></i> Lihat
+                    </a>
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+    {% include "blog/base/pagination.html" %}
+{% else %}
+    <p class="text-muted">Belum ada peserta.</p>
+{% endif %}
