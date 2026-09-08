@@ -38,12 +38,12 @@ def get_navbar_context(request):
             "url": reverse("blog:participant_search"),
             "active": request.resolver_match.url_name == "participant_search",
         },
-        {
-            "label": "Daftar",
-            "url": "https://forms.gle/qfS3iRQF8cXBVgEm8",
-            "active": False,
-            "external": True,
-        },
+        # {
+        #     "label": "Daftar",
+        #     "url": "https://forms.gle/qfS3iRQF8cXBVgEm8",
+        #     "active": False,
+        #     "external": True,
+        # },
     ]
 
     pages = Page.objects.filter(status="published").order_by("title")

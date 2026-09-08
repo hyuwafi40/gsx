@@ -7,6 +7,9 @@
         <title>
             {% block title %}{% endblock %}
         </title>
+        {% if brand.logo %}
+            <link rel="icon" href="{{ brand.logo }}">
+        {% endif %}
         {% block meta %}{% endblock %}
         {% block head_assets %}
             <link rel="stylesheet"

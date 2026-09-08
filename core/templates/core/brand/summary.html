@@ -6,7 +6,9 @@
     <div class="grid-2">
         <div class="profile-main">
             {% if brand.logo %}
-                <img src="{{ brand.logo }}" alt="{{ brand.name }}" class="profile-photo">
+                <img src="{{ brand.logo }}"
+                     alt="{{ brand.name }}"
+                     class="profile-photo brand-profile-photo">
             {% else %}
                 <div class="avatar-text avatar-blue profile-placeholder">{{ brand.name|slice:":2"|upper }}</div>
             {% endif %}

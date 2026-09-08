@@ -13,7 +13,9 @@ DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in config("DJANGO_ALLOWED_HOSTS", default=".vercel.app,localhost,127.0.0.1").split(",")
+    for host in config(
+        "DJANGO_ALLOWED_HOSTS", default=".vercel.app,localhost,127.0.0.1"
+    ).split(",")
 ]
 
 INSTALLED_APPS = [
@@ -100,19 +102,48 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "core:index"
 LOGOUT_REDIRECT_URL = "login"
 
+# CKEDITOR_5_CONFIGS = {
+#     "default": {
+#         "toolbar": [
+#             "heading",
+#             "|",
+#             "bold",
+#             "italic",
+#             "link",
+#             "bulletedList",
+#             "numberedList",
+#             "blockQuote",
+#             "imageUpload",
+#             "imageInsert",
+#         ],
+#     },
+# }
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [
+            "undo",
+            "redo",
+            "|",
             "heading",
             "|",
             "bold",
             "italic",
+            "underline",
             "link",
+            "|",
             "bulletedList",
             "numberedList",
+            "alignment",
+            "outdent",
+            "indent",
+            "|",
             "blockQuote",
+            "insertTable",
             "imageUpload",
             "imageInsert",
+            "mediaEmbed",
+            "|",
+            "removeFormat",
         ],
     },
 }

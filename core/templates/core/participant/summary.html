@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load static %}
+{% load participant_extras %}
 {% block title %}Detail Participant{% endblock %}
 {% block heading %}Detail Participant{% endblock %}
 {% block subheading %}{{ participant.stage_name }}{% endblock %}
@@ -14,7 +15,7 @@
             </div>
             <div class="profile-main">
                 {% if participant.photo_selfie %}
-                    <img src="{{ participant.photo_selfie }}"
+                    <img src="{{ participant.photo_selfie|drive_image_url }}"
                          alt="{{ participant.stage_name }}"
                          class="profile-photo">
                 {% else %}
@@ -99,7 +100,9 @@
                 {% if participant.photo_close %}
                     <div class="doc-card">
                         <span class="doc-label">Foto Close Up</span>
-                        <img src="{{ participant.photo_close }}" alt="Close Up" class="doc-image">
+                        <img src="{{ participant.photo_close|drive_image_url }}"
+                             alt="Close Up"
+                             class="doc-image">
                     </div>
                 {% endif %}
                 {% if participant.invoice %}

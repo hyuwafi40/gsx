@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% load static %}
+{% load participant_extras %}
 {% block title %}{{ participant.stage_name }} - Peserta - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
 {% block meta %}
     <meta name="description"
@@ -23,7 +24,7 @@
         <div class="blog-participant-profile-card blog-card">
             <div class="blog-participant-profile">
                 {% if participant.photo_selfie %}
-                    <img src="{{ participant.photo_selfie }}"
+                    <img src="{{ participant.photo_selfie|drive_image_url }}"
                          alt="{{ participant.stage_name }}"
                          class="blog-participant-photo">
                 {% else %}

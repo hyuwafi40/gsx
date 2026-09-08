@@ -59,3 +59,52 @@
     line-height: 1.75;
     color: var(--text-dark);
 }
+
+.blog-page-content img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto !important;
+    margin: 20px auto;
+    border-radius: var(--rad-md);
+    object-fit: contain;
+}
+
+.blog-page-content figure {
+    max-width: 100%;
+    margin: 20px 0;
+}
+
+.blog-page-content figure img {
+    margin: 0 auto 8px;
+}
+
+.blog-page-content figcaption {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.blog-page-content table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    table-layout: auto;
+}
+
+.blog-page-content th,
+.blog-page-content td {
+    padding: 10px 12px;
+    border: 1px solid #000;
+    text-align: left;
+    vertical-align: top;
+}
+
+.blog-page-content th {
+    background: rgba(255, 255, 255, 0.45);
+    font-weight: 600;
+}

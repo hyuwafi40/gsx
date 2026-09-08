@@ -3,6 +3,9 @@
 {% block title %}Brand{% endblock %}
 {% block heading %}Brand{% endblock %}
 {% block subheading %}Kelola informasi brand{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/brand.css' %}">
+{% endblock %}
 {% block content %}
     {% if brand %}
         {% include "core/brand/summary.html" %}

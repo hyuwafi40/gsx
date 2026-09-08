@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load participant_extras %}
 <html lang="id">
     <head>
         <meta charset="UTF-8">
@@ -379,7 +380,7 @@
                         <div class="photo-box">
                             <div class="photo-label">Foto Selfie</div>
                             <img class="photo-img"
-                                 src="{{ participant.photo_selfie }}"
+                                 src="{{ participant.photo_selfie|drive_image_url }}"
                                  alt="Foto Selfie">
                         </div>
                     {% endif %}
@@ -387,7 +388,7 @@
                         <div class="photo-box">
                             <div class="photo-label photo-label--purple">Foto Close-up</div>
                             <img class="photo-img photo-img--small"
-                                 src="{{ participant.photo_close }}"
+                                 src="{{ participant.photo_close|drive_image_url }}"
                                  alt="Foto Close-up">
                         </div>
                     {% endif %}

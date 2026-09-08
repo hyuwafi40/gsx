@@ -1,3 +1,4 @@
+{% load participant_extras %}
 {% if page_obj %}
     <div class="blog-participant-list">
         {% for participant in page_obj %}
@@ -5,7 +6,7 @@
                 <span class="blog-participant-item-number">{{ forloop.counter }}</span>
                 <div class="blog-participant-item-media">
                     {% if participant.photo_selfie %}
-                        <img src="{{ participant.photo_selfie }}"
+                        <img src="{{ participant.photo_selfie|drive_image_url }}"
                              alt="{{ participant.stage_name }}"
                              loading="lazy">
                     {% else %}

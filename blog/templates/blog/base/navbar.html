@@ -17,19 +17,16 @@
                    {% if item.active %}aria-current="page"{% endif %}
                    {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.label }}</a>
             {% endfor %}
-            {% if user.is_authenticated %}
-                <a href="{% url 'core:index' %}"
-                   class="blog-nav-mobile-action blog-nav-link">Dashboard</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="blog-nav-mobile-action blog-nav-link">Masuk</a>
-            {% endif %}
+            <a href="{{ blog_registration_url }}"
+               class="blog-nav-mobile-action blog-nav-link"
+               target="_blank"
+               rel="noopener noreferrer">Daftar</a>
         </nav>
         <div class="blog-nav-actions">
-            {% if user.is_authenticated %}
-                <a href="{% url 'core:index' %}" class="blog-btn">Dashboard</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="blog-btn">Masuk</a>
-            {% endif %}
+            <a href="{{ blog_registration_url }}"
+               class="blog-btn"
+               target="_blank"
+               rel="noopener noreferrer">Daftar</a>
         </div>
         <button type="button"
                 class="blog-nav-toggle"

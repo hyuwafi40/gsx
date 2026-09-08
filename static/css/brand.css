@@ -7,6 +7,17 @@
     margin-bottom: 12px;
 }
 
+.brand-profile-photo {
+    width: clamp(56px, 10vw, 88px);
+    height: clamp(56px, 10vw, 88px);
+    aspect-ratio: 1;
+    max-width: 30%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-glow);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
 .brand-social {
     display: flex;
     align-items: center;
