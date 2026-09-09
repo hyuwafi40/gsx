@@ -3,9 +3,12 @@
         <form hx-get="{% url 'core:article_list' %}"
               hx-target="#articleTableContainer"
               hx-swap="innerHTML"
+              hx-trigger="keyup changed delay:300ms from:input"
               class="search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text"
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label class="sr-only" for="article-search">Cari artikel</label>
+            <input id="article-search"
+                   type="search"
                    name="q"
                    class="search-input"
                    placeholder="Cari artikel..."

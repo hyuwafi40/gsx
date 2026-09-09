@@ -1,4 +1,8 @@
 {% extends "core/base.html" %}
+{% block head_assets %}
+    {{ block.super }}
+    {{ form.media }}
+{% endblock %}
 {% block title %}{% if form.instance.pk %}Edit Artikel{% else %}Tambah Artikel{% endif %}{% endblock %}
 {% block heading %}{% if form.instance.pk %}Edit Artikel{% else %}Tambah Artikel{% endif %}{% endblock %}
 {% block subheading %}Kelola artikel dan konten{% endblock %}
@@ -7,9 +11,8 @@
         <div class="card-header">
             <span class="card-title"><i class="fa-solid fa-newspaper"></i> {% if form.instance.pk %}Edit Artikel{% else %}Tambah Artikel{% endif %}</span>
         </div>
-        <form method="post" action="{{ form_action }}">
+        <form method="post" action="{{ form_action }}" class="article-form">
             {% csrf_token %}
-            {{ form.media }}
             {{ form.as_p }}
             <div class="btn-group">
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Simpan</button>

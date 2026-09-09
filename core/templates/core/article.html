@@ -6,7 +6,7 @@
 {% block content %}
     {% include "core/article/hero.html" %}
     {% include "core/article/control.html" %}
-    <div id="articleTableContainer">{% include "core/article/table.html" %}</div>
+    <div id="articleTableContainer" aria-live="polite">{% include "core/article/table.html" %}</div>
 {% endblock %}
 {% block modal %}
     <div id="deleteModalContainer">{% include "core/base/delete.html" %}</div>
