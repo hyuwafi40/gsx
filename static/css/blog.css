@@ -374,9 +374,10 @@ body::after {
     margin: 0 auto;
     font-size: clamp(2.4rem, 12vw, 5.5rem);
     font-weight: 700;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     color: white;
     line-height: 0.98;
+    overflow-wrap: anywhere;
 }
 
 .blog-hero-desc {
@@ -574,8 +575,8 @@ body::after {
     padding: 54px 20px 22px;
     background: linear-gradient(180deg, transparent 0%, rgba(16, 42, 67, 0.9) 68%, rgba(16, 42, 67, 0.98) 100%);
     color: white;
-    opacity: 0;
-    pointer-events: none;
+    opacity: 1;
+    pointer-events: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -722,6 +723,11 @@ body::after {
     gap: 32px;
     padding-left: 100%;
     animation: tickerScroll 30s linear infinite;
+}
+
+.blog-ticker:hover .blog-ticker-content,
+.blog-ticker:focus-within .blog-ticker-content {
+    animation-play-state: paused;
 }
 
 .blog-ticker-item {
@@ -1660,6 +1666,10 @@ body::after {
 
     .blog-hero-title {
         font-size: clamp(2.2rem, 11vw, 3.6rem);
+    }
+
+    .blog-ticker-content {
+        animation-duration: 42s;
     }
 
     .social-icon {

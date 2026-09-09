@@ -1,42 +1,38 @@
-{% if latest_articles %}
-    <section class="blog-latest" id="terbaru">
-        <div class="blog-section-heading">
-            <span class="blog-section-eyebrow">Kabar terbaru</span>
-            <h2 class="blog-section-title"><i class="fa-solid fa-clock"></i> Terbaru</h2>
-        </div>
-        <div class="blog-news-feed">
-            {% for article in latest_articles %}
-                <article class="blog-feed-item blog-card">
-                    <span class="blog-feed-index">{{ forloop.counter|stringformat:"02d" }}</span>
-                    <a href="{% url 'blog:article_detail' article.slug %}"
-                       class="blog-feed-media">
-                        {% if article.thumbnail %}
-                            <img src="{{ article.thumbnail }}"
-                                 alt="{{ article.title }}"
-                                 loading="lazy">
-                        {% else %}
-                            <div class="blog-card-media-placeholder">
-                                <i class="fa-solid fa-newspaper"></i>
-                            </div>
-                        {% endif %}
-                    </a>
-                    <div class="blog-feed-body">
-                        <span class="blog-feed-label">Berita terbaru</span>
-                        <h3><a href="{% url 'blog:article_detail' article.slug %}">{{ article.title }}</a></h3>
-                        <div class="blog-card-meta">
-                            {% if article.category %}
-                                <span class="blog-card-category">{{ article.category.name }}</span>
-                            {% endif %}
-                            <span class="blog-card-date">{{ article.created_at|date:"d M Y" }}</span>
+<section class="blog-latest" id="terbaru">
+    <div class="blog-section-heading">
+        <span class="blog-section-eyebrow">Kabar terbaru</span>
+        <h2 class="blog-section-title"><i class="fa-solid fa-clock"></i> Terbaru</h2>
+    </div>
+    <div class="blog-news-feed">
+        {% for article in latest_articles %}
+            <article class="blog-feed-item blog-card">
+                <span class="blog-feed-index">{{ forloop.counter|stringformat:"02d" }}</span>
+                <a href="{% url 'blog:article_detail' article.slug %}"
+                   class="blog-feed-media">
+                    {% if article.thumbnail %}
+                        <img src="{{ article.thumbnail }}"
+                             alt="{{ article.title }}"
+                             loading="lazy">
+                    {% else %}
+                        <div class="blog-card-media-placeholder">
+                            <i class="fa-solid fa-newspaper"></i>
                         </div>
-                        <p>{{ article.content|striptags|truncatechars:140 }}</p>
+                    {% endif %}
+                </a>
+                <div class="blog-feed-body">
+                    <span class="blog-feed-label">Berita terbaru</span>
+                    <h3><a href="{% url 'blog:article_detail' article.slug %}">{{ article.title }}</a></h3>
+                    <div class="blog-card-meta">
+                        {% if article.category %}
+                            <span class="blog-card-category">{{ article.category.name }}</span>
+                        {% endif %}
+                        <span class="blog-card-date">{{ article.created_at|date:"d M Y" }}</span>
                     </div>
-                </article>
-            {% empty %}
-                <p class="text-muted">Belum ada artikel terbaru.</p>
-            {% endfor %}
-        </div>
-    </section>
-{% else %}
-    <p class="text-muted">Belum ada artikel terbaru.</p>
-{% endif %}
+                    <p>{{ article.content|striptags|truncatechars:140 }}</p>
+                </div>
+            </article>
+        {% empty %}
+            <p class="text-muted">Belum ada artikel terbaru.</p>
+        {% endfor %}
+    </div>
+</section>
