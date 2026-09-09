@@ -327,11 +327,11 @@
                             </tr>
                             <tr>
                                 <td class="label">NIK / Identitas</td>
-                                <td class="value">{{ participant.nik }}</td>
+                                <td class="value">{{ masked_nik }}</td>
                             </tr>
                             <tr>
                                 <td class="label">Tanggal Lahir</td>
-                                <td class="value">{{ participant.birthdate|date:"d M Y" }}</td>
+                                <td class="value">{{ masked_birthdate }}</td>
                             </tr>
                             <tr>
                                 <td class="label">Jenis Kelamin</td>
@@ -352,11 +352,11 @@
                         <table class="info-table">
                             <tr>
                                 <td class="label">WhatsApp</td>
-                                <td class="value">{{ participant.whatsapp }}</td>
+                                <td class="value">{{ masked_whatsapp }}</td>
                             </tr>
                             <tr>
                                 <td class="label">Email Terdaftar</td>
-                                <td class="value">{{ participant.email }}</td>
+                                <td class="value">{{ masked_email }}</td>
                             </tr>
                             <tr>
                                 <td class="label">Tgl Pendaftaran</td>

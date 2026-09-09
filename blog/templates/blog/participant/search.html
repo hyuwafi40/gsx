@@ -21,7 +21,7 @@
           hx-get="{% url 'blog:participant_search' %}"
           hx-target="#participantSearchResults"
           hx-swap="innerHTML"
-          hx-trigger="keyup changed delay:300ms">
+          hx-trigger="keyup changed delay:300ms from:input">
         <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         <input type="text"
                id="participantSearchInput"

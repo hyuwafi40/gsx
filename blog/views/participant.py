@@ -111,6 +111,10 @@ class ParticipantDownloadView(View):
         context = {
             "participant": participant,
             "brand": brand,
+            "masked_nik": self.mask_value(participant.nik, "nik"),
+            "masked_birthdate": self.mask_value(participant.birthdate, "birthdate"),
+            "masked_email": self.mask_value(participant.email, "email"),
+            "masked_whatsapp": self.mask_value(participant.whatsapp, "whatsapp"),
         }
         html = render_to_string("blog/participant/pdf.html", context, request=request)
         response = HttpResponse(content_type="application/pdf")

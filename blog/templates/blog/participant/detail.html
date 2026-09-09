@@ -13,11 +13,13 @@
     <div class="blog-participant-detail">
         <div class="blog-participant-header">
             <a href="{% url 'blog:participant_list' %}"
-               class="blog-btn-ghost-light mb-20">
+               class="blog-btn-ghost-light mb-20"
+               aria-label="Kembali ke daftar peserta">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar
             </a>
             <a href="{% url 'blog:participant_download' participant.pk %}"
-               class="blog-btn blog-btn-primary mb-20">
+               class="blog-btn blog-btn-primary mb-20"
+               aria-label="Download data peserta {{ participant.stage_name }}">
                 <i class="fa-solid fa-download"></i> Download
             </a>
         </div>

@@ -18,11 +18,13 @@
                         </div>
                         <div class="blog-participant-item-body">
                             <h3>{{ participant.stage_name }}</h3>
-                            <div class="blog-card-meta">
-                                <span class="blog-card-category">{{ participant.get_gender_display|default:"-" }}</span>
-                                <span class="blog-card-date">{{ participant.region|default:"-" }}</span>
+                            <div class="blog-participant-meta">
+                                <span><i class="fa-solid fa-venus-mars"></i> {{ participant.get_gender_display|default:"-" }}</span>
+                                <span><i class="fa-solid fa-location-dot"></i> {{ participant.region|default:"-" }}</span>
                             </div>
-                            <span class="status-badge status-active">Terverifikasi</span>
+                            <span class="blog-participant-status verified">
+                                <i class="fa-solid fa-circle-check"></i> Terverifikasi
+                            </span>
                         </div>
                         <a href="{% url 'blog:participant_detail' participant.pk %}"
                            class="blog-btn blog-btn-primary">Lihat</a>
@@ -31,9 +33,9 @@
                     <article class="blog-participant-item blog-card">
                         <div class="blog-participant-item-body">
                             <h3>{{ participant.stage_name }}</h3>
-                            <div class="blog-card-meta">
-                                <span class="blog-card-category">Dalam proses verifikasi</span>
-                            </div>
+                            <span class="blog-participant-status registered">
+                                <i class="fa-solid fa-clock"></i> Dalam proses verifikasi
+                            </span>
                         </div>
                     </article>
                 {% endif %}

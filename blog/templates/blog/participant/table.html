@@ -33,7 +33,8 @@
                 </div>
                 {% if participant.status == "verified" %}
                     <a href="{% url 'blog:participant_detail' participant.pk %}"
-                       class="blog-btn blog-btn-primary">
+                       class="blog-btn blog-btn-primary"
+                       aria-label="Lihat peserta {{ participant.stage_name }}">
                         <i class="fa-solid fa-eye"></i> Lihat
                     </a>
                 {% endif %}
