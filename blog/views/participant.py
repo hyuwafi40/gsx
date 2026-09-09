@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Count, Q
@@ -7,6 +9,8 @@ from django.template.loader import render_to_string
 from django.views import View
 from xhtml2pdf import pisa
 from core.models import Brand, Participant
+
+logger = logging.getLogger(__name__)
 
 
 class ParticipantMaskingMixin:
@@ -123,7 +127,14 @@ class ParticipantDownloadView(ParticipantMaskingMixin, View):
         response["Content-Disposition"] = (
             f'attachment; filename="participant_{participant.pk}.pdf"'
         )
-        pisa_status = pisa.CreatePDF(html, dest=response)
+        try:
+            pisa_status = pisa.CreatePDF(html, dest=response)
+        except Exception:
+            logger.exception(
+                "Failed to generate participant PDF for %s", participant.pk
+            )
+            messages.error(request, "Gagal membuat PDF.")
+            return redirect("blog:participant_detail", pk=pk)
         if pisa_status.err:
             messages.error(request, "Gagal membuat PDF.")
             return redirect("blog:participant_detail", pk=pk)
