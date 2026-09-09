@@ -47,8 +47,9 @@ def get_navbar_context(request):
     ]
 
     pages = Page.objects.filter(status="published").order_by("title")
+    page_items = []
     for page in pages:
-        menu_items.append(
+        page_items.append(
             {
                 "label": page.title,
                 "url": reverse("blog:page_detail", args=[page.slug]),
@@ -59,6 +60,8 @@ def get_navbar_context(request):
 
     return {
         "blog_nav_items": menu_items,
+        "blog_page_items": page_items,
+        "blog_pages_active": any(item["active"] for item in page_items),
         "blog_brand_name": brand.name,
         "blog_brand_logo": brand.logo,
         "blog_registration_url": "https://forms.gle/qfS3iRQF8cXBVgEm8",

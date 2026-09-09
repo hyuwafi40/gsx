@@ -17,6 +17,23 @@
                    {% if item.active %}aria-current="page"{% endif %}
                    {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.label }}</a>
             {% endfor %}
+            {% if blog_page_items %}
+                <div class="blog-nav-dropdown {% if blog_pages_active %}active{% endif %}">
+                    <button type="button"
+                            class="blog-nav-link blog-nav-dropdown-toggle"
+                            aria-expanded="false"
+                            aria-controls="blogPagesMenu">
+                        Halaman <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="blog-nav-dropdown-menu" id="blogPagesMenu">
+                        {% for item in blog_page_items %}
+                            <a href="{{ item.url }}"
+                               class="blog-nav-link {% if item.active %}active{% endif %}"
+                               {% if item.active %}aria-current="page"{% endif %}>{{ item.label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
             <a href="{{ blog_registration_url }}"
                class="blog-nav-mobile-action blog-nav-link"
                target="_blank"

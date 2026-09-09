@@ -6,14 +6,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (toggle && navLinks) {
         const icon = toggle.querySelector("i");
+        const dropdowns = navLinks.querySelectorAll(".blog-nav-dropdown");
 
         const closeNavigation = (restoreFocus = false) => {
             navLinks.classList.remove("open");
             toggle.setAttribute("aria-expanded", "false");
             toggle.setAttribute("aria-label", "Buka navigasi");
             icon?.classList.replace("fa-xmark", "fa-bars");
+            dropdowns.forEach((dropdown) => {
+                dropdown.classList.remove("open");
+                dropdown.querySelector(".blog-nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+            });
             if (restoreFocus) toggle.focus();
         };
+
+        dropdowns.forEach((dropdown) => {
+            const dropdownToggle = dropdown.querySelector(".blog-nav-dropdown-toggle");
+            if (!dropdownToggle) return;
+
+            dropdownToggle.addEventListener("click", () => {
+                const isOpen = dropdown.classList.toggle("open");
+                dropdowns.forEach((otherDropdown) => {
+                    if (otherDropdown === dropdown) return;
+                    otherDropdown.classList.remove("open");
+                    otherDropdown.querySelector(".blog-nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+                });
+                dropdownToggle.setAttribute("aria-expanded", String(isOpen));
+            });
+        });
 
         toggle.addEventListener("click", () => {
             const isOpen = navLinks.classList.toggle("open");
@@ -29,6 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         navLinks.addEventListener("keydown", (event) => {
             if (event.key !== "Escape") return;
+            const openDropdown = navLinks.querySelector(".blog-nav-dropdown.open");
+            if (openDropdown) {
+                openDropdown.classList.remove("open");
+                openDropdown.querySelector(".blog-nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+                openDropdown.querySelector(".blog-nav-dropdown-toggle")?.focus();
+                return;
+            }
             closeNavigation(true);
         });
 
