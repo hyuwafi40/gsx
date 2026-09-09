@@ -5,18 +5,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.getElementById("blogNavLinks");
 
     if (toggle && navLinks) {
+        const icon = toggle.querySelector("i");
+
+        const closeNavigation = (restoreFocus = false) => {
+            navLinks.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Buka navigasi");
+            icon?.classList.replace("fa-xmark", "fa-bars");
+            if (restoreFocus) toggle.focus();
+        };
+
         toggle.addEventListener("click", () => {
             const isOpen = navLinks.classList.toggle("open");
             toggle.setAttribute("aria-expanded", String(isOpen));
             toggle.setAttribute("aria-label", isOpen ? "Tutup navigasi" : "Buka navigasi");
+            icon?.classList.toggle("fa-bars", !isOpen);
+            icon?.classList.toggle("fa-xmark", isOpen);
+        });
+
+        navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => closeNavigation());
         });
 
         navLinks.addEventListener("keydown", (event) => {
             if (event.key !== "Escape") return;
-            navLinks.classList.remove("open");
-            toggle.setAttribute("aria-expanded", "false");
-            toggle.setAttribute("aria-label", "Buka navigasi");
-            toggle.focus();
+            closeNavigation(true);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!navLinks.classList.contains("open")) return;
+            if (navLinks.contains(event.target) || toggle.contains(event.target)) return;
+            closeNavigation();
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.matchMedia("(min-width: 1024px)").matches) {
+                closeNavigation();
+            }
         });
     }
 

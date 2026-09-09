@@ -102,22 +102,6 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "core:index"
 LOGOUT_REDIRECT_URL = "login"
 
-# CKEDITOR_5_CONFIGS = {
-#     "default": {
-#         "toolbar": [
-#             "heading",
-#             "|",
-#             "bold",
-#             "italic",
-#             "link",
-#             "bulletedList",
-#             "numberedList",
-#             "blockQuote",
-#             "imageUpload",
-#             "imageInsert",
-#         ],
-#     },
-# }
 CKEDITOR_5_CONFIGS = {
     "default": {
         "toolbar": [

@@ -151,17 +151,25 @@ body::after {
     justify-content: space-between;
     gap: 16px;
     position: relative;
+    min-width: 0;
 }
 
 .blog-brand {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
     font-size: 20px;
     font-weight: 700;
     color: var(--text-dark);
     text-decoration: none;
     letter-spacing: -0.6px;
+}
+
+.blog-brand span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .blog-brand i,
@@ -818,6 +826,7 @@ body::after {
 .blog-headlines-grid,
 .blog-latest-list {
     display: grid;
+    min-width: 0;
     gap: 16px;
 }
 
@@ -1258,10 +1267,14 @@ body::after {
 
 .blog-footer-brand {
     display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
     font-size: 18px;
     font-weight: 700;
     color: var(--text-dark);
     text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .blog-footer-brand:hover {
@@ -1300,6 +1313,7 @@ body::after {
 
 .blog-footer-social {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
 }
 
@@ -1351,9 +1365,11 @@ body::after {
 
 .blog-pagination {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     gap: 6px;
     justify-content: center;
+    max-width: 100%;
     margin-top: 20px;
 }
 
@@ -1431,7 +1447,7 @@ body::after {
 
     .blog-headlines-grid,
     .blog-latest-list {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .blog-footer-grid {
@@ -1551,7 +1567,7 @@ body::after {
 
     .blog-headlines-grid,
     .blog-latest-list {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .blog-nav-toggle {
@@ -1559,7 +1575,7 @@ body::after {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
     .blog-nav-links {
         display: none;
         flex-direction: column;
@@ -1598,6 +1614,10 @@ body::after {
         display: flex;
     }
 
+    .blog-navbar-inner {
+        gap: 10px;
+    }
+
     .blog-btn {
         padding: 8px 14px;
         font-size: 12px;
@@ -1624,6 +1644,27 @@ body::after {
 
     .fullwidth {
         border-radius: 0;
+    }
+}
+
+@media (max-width: 599px) {
+
+    .blog-featured-stage,
+    .blog-hero {
+        min-height: 500px;
+    }
+
+    .blog-hero {
+        padding: 36px 16px 52px;
+    }
+
+    .blog-hero-title {
+        font-size: clamp(2.2rem, 11vw, 3.6rem);
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
     }
 }
 
