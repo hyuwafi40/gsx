@@ -244,12 +244,25 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
     padding: 12px;
     border-radius: var(--rad-md);
     background: rgba(255, 255, 255, 0.5);
     border: 1px solid var(--glass-border);
     margin-top: auto;
     flex-shrink: 0;
+}
+
+.sidebar-user .user-info {
+    min-width: 0;
+}
+
+.sidebar-user .user-name,
+.sidebar-user .user-sub,
+.nav-link span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .overlay {
@@ -273,6 +286,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-width: 0;
     padding: 16px 20px;
     position: sticky;
     top: 0;
@@ -811,6 +825,10 @@ tr:hover {
     opacity: 0.4;
 }
 
+.page-item.disabled a {
+    pointer-events: none;
+}
+
 .page-item.ellipsis {
     cursor: default;
     pointer-events: none;
@@ -822,13 +840,15 @@ tr:hover {
 
 .toast-container {
     position: fixed;
-    top: 24px;
+    top: max(16px, env(safe-area-inset-top));
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    padding: 0 16px;
     pointer-events: none;
     align-items: center;
 }
@@ -1285,6 +1305,30 @@ tr:hover {
 
     .toast {
         width: calc(100vw - 32px);
+    }
+
+    .modal {
+        width: calc(100% - 24px);
+        max-height: calc(100vh - 24px);
+        padding: 18px;
+        border-radius: var(--rad-md);
+    }
+}
+
+@media (max-width: 380px) {
+    .navbar-heading {
+        max-width: 34vw;
+        font-size: 14px;
+    }
+
+    .navbar-right {
+        gap: 4px;
+    }
+
+    .action-icon,
+    .navbar-avatar {
+        width: 34px;
+        height: 34px;
     }
 }
 

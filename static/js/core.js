@@ -57,12 +57,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById("overlay");
     const btnToggle = document.getElementById("btnToggle");
 
-    if (btnToggle) {
-        btnToggle.addEventListener("click", () => {
-            sidebar.classList.add("active");
-            overlay.classList.add("active");
-        });
-    }
+    const syncOverlayState = () => {
+        if (!overlay) return;
+
+        const isActive = Boolean(
+            sidebar?.classList.contains("active") ||
+            document.querySelector(".modal.active")
+        );
+        overlay.classList.toggle("active", isActive);
+        overlay.setAttribute("aria-hidden", String(!isActive));
+    };
+
+    const setSidebarState = (isOpen) => {
+        if (!sidebar) return;
+
+        sidebar.classList.toggle("active", isOpen);
+        sidebar.setAttribute("aria-hidden", String(!isOpen));
+        syncOverlayState();
+
+        if (btnToggle) {
+            btnToggle.setAttribute("aria-expanded", String(isOpen));
+            btnToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation" : "Open navigation"
+            );
+        }
+    };
+
+    const syncSidebarForViewport = () => {
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+            setSidebarState(false);
+            sidebar?.setAttribute("aria-hidden", "false");
+        } else if (!sidebar?.classList.contains("active")) {
+            setSidebarState(false);
+        }
+    };
+
+    setSidebarState(false);
+    syncSidebarForViewport();
+    window.addEventListener("resize", syncSidebarForViewport);
+
+    btnToggle?.addEventListener("click", () => {
+        setSidebarState(!sidebar?.classList.contains("active"));
+    });
 
     document.addEventListener("click", (e) => {
         const actionIcon = e.target.closest(".action-icon");
@@ -78,7 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (closeButton) {
             const modal = closeButton.closest(".modal");
             if (modal) modal.classList.remove("active");
-            if (overlay) overlay.classList.remove("active");
+            syncOverlayState();
+            return;
+        }
+
+        const navLink = e.target.closest(".nav-link");
+        if (navLink) {
+            setSidebarState(false);
             return;
         }
 
@@ -94,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 form.action = url;
                 nameSpan.textContent = name;
                 modal.classList.add("active");
-                if (overlay) overlay.classList.add("active");
+                syncOverlayState();
             }
             return;
         }
@@ -102,14 +145,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === overlay) {
             const activeModals = document.querySelectorAll(".modal.active");
             activeModals.forEach(m => m.classList.remove("active"));
-            if (overlay) overlay.classList.remove("active");
+            setSidebarState(false);
         }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key !== "Escape") return;
+
+        document.querySelectorAll(".modal.active").forEach(modal => {
+            modal.classList.remove("active");
+        });
+        setSidebarState(false);
     });
 
     document.body.addEventListener("htmx:afterSwap", () => {
         const modal = document.querySelector(".modal.active");
-        if (modal && overlay) {
-            overlay.classList.add("active");
-        }
+        if (modal) syncOverlayState();
     });
 });
