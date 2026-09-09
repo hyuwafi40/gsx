@@ -5,461 +5,341 @@
         <meta charset="UTF-8">
         <title>{{ participant.stage_name }}</title>
         <style>
-            @page {
-                size: A4 portrait;
-                margin: 8mm;
-            }
-            body {
-                font-family: Helvetica, Arial, sans-serif;
-                color: #0f172a;
-                margin: 0;
-                padding: 0;
-                font-size: 8.5pt;
-                line-height: 1.3;
-                background-color: #ffffff;
-            }
+        @page {
+            size: A4 portrait;
+            margin: 0; /* Margin dinolkan agar desain border-to-border, padding diatur di body/table */
+        }
+        
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 10mm; /* Jarak aman tepi kertas */
+            background-color: #f8fafc;
+        }
 
-            /* --- HEADER ACCENT BAR --- */
-            .header-accent {
-                width: 100%;
-                height: 5px;
-                border-collapse: collapse;
-            }
-            .header-accent td {
-                height: 5px;
-                padding: 0;
-            }
-            .accent-navy {
-                width: 60%;
-                background-color: #0f172a;
-            }
-            .accent-teal {
-                width: 25%;
-                background-color: #0d9488;
-            }
-            .accent-gold {
-                width: 15%;
-                background-color: #d97706;
-            }
+        /* --- MASTER LAYOUT --- */
+        .master-wrapper {
+            width: 100%;
+            background-color: #ffffff;
+            border-collapse: collapse;
+            border: 1px solid #cbd5e1;
+        }
 
-            /* --- HEADER CARD --- */
-            .header-card {
-                width: 100%;
-                background-color: #0f172a;
-                color: #ffffff;
-                border-collapse: collapse;
-            }
-            .header-logo-cell {
-                width: 85px;
-                padding: 12px 6px 12px 14px;
-                vertical-align: middle;
-            }
-            .header-logo-cell img {
-                width: 65px;
-                height: 65px;
-                border: 2px solid #d97706;
-            }
-            .header-title-cell {
-                padding: 12px 10px;
-                vertical-align: middle;
-            }
-            .header-kicker {
-                color: #f59e0b;
-                font-size: 7pt;
-                font-weight: bold;
-                letter-spacing: 1.5px;
-                text-transform: uppercase;
-                margin-bottom: 3px;
-            }
-            .header-brand {
-                font-size: 18pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                color: #ffffff;
-                margin: 0;
-                letter-spacing: 0.8px;
-                line-height: 1.1;
-            }
-            .header-sub {
-                font-size: 8pt;
-                color: #94a3b8;
-                margin: 4px 0 0 0;
-                line-height: 1.3;
-            }
-            .header-status-cell {
-                width: 120px;
-                padding: 12px 14px 12px 6px;
-                vertical-align: middle;
-                text-align: right;
-            }
-            .status-badge {
-                display: inline-block;
-                background-color: #0d9488;
-                color: #ffffff;
-                padding: 4px 10px;
-                font-size: 7.5pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-            .reg-number {
-                font-size: 9.5pt;
-                font-weight: bold;
-                color: #f59e0b;
-                margin-top: 6px;
-                letter-spacing: 0.5px;
-            }
+        /* --- LEFT PANEL: VISUAL IDENTITY --- */
+        .panel-visual {
+            width: 32%;
+            background-color: #0f172a; /* Slate 900 */
+            vertical-align: top;
+            padding: 30px 15px;
+            text-align: center;
+        }
 
-            /* --- SUB-HEADER BANNER --- */
-            .header-bottom {
-                background-color: #f1f5f9;
-                border-bottom: 1px solid #cbd5e1;
-                padding: 6px 14px;
-                text-align: left;
-            }
-            .header-doc-type {
-                font-size: 7.5pt;
-                color: #475569;
-                text-transform: uppercase;
-                letter-spacing: 1.2px;
-                font-weight: bold;
-            }
+        .brand-logo {
+            width: 75px;
+            height: 75px;
+            margin-bottom: 20px;
+            border: 2px solid #d97706; /* Amber accent */
+        }
 
-            /* --- MAIN LAYOUT GRID --- */
-            .layout-table {
-                width: 100%;
-                margin-top: 8px;
-                border-collapse: collapse;
-            }
-            .column-main {
-                width: 63%;
-                vertical-align: top;
-                padding-right: 5px;
-            }
-            .column-side {
-                width: 37%;
-                vertical-align: top;
-                padding-left: 5px;
-            }
+        .stage-name {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
 
-            /* --- CARDS & TABLES --- */
-            .card {
-                background-color: #ffffff;
-                border: 1px solid #cbd5e1;
-                padding: 9px 10px;
-                margin-bottom: 8px;
-                page-break-inside: avoid;
-            }
-            .card-header {
-                border-bottom: 1.5pt solid #0f172a;
-                padding-bottom: 4px;
-                margin-bottom: 6px;
-            }
-            .card-header--teal {
-                border-bottom-color: #0d9488;
-            }
-            .card-title {
-                font-size: 9pt;
-                font-weight: bold;
-                color: #0f172a;
-                margin: 0;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-            .card-title--teal {
-                color: #0d9488;
-            }
+        .reg-id {
+            font-size: 10pt;
+            color: #eab308; /* Yellow 500 */
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
 
-            .info-table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            .info-table td {
-                padding: 4px 6px;
-                vertical-align: middle;
-                border-bottom: 0.5pt solid #e2e8f0;
-            }
-            .info-table tr.even-row td {
-                background-color: #f8fafc;
-            }
-            .label {
-                color: #64748b;
-                font-size: 7.5pt;
-                font-weight: bold;
-                text-transform: uppercase;
-                letter-spacing: 0.3px;
-                width: 38%;
-            }
-            .value {
-                color: #0f172a;
-                font-size: 8.5pt;
-                font-weight: bold;
-            }
-            .highlight-value {
-                color: #0d9488;
-                font-size: 9pt;
-            }
+        .status-badge {
+            background-color: #0d9488; /* Teal 600 */
+            color: #ffffff;
+            padding: 6px 12px;
+            font-size: 8pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-            /* --- SIDE COLUMN COMPONENTS --- */
-            .participant-no-box {
-                background-color: #0f172a;
-                border: 1px solid #0f172a;
-                text-align: center;
-                padding: 8px;
-                margin-bottom: 8px;
-                page-break-inside: avoid;
-            }
-            .participant-no-label {
-                font-size: 7pt;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: #94a3b8;
-                font-weight: bold;
-            }
-            .participant-no-code {
-                font-size: 12pt;
-                font-weight: bold;
-                color: #f59e0b;
-                margin-top: 2px;
-                letter-spacing: 0.5px;
-            }
+        .photo-wrapper {
+            margin-top: 35px;
+            width: 100%;
+        }
 
-            .photo-box {
-                background-color: #ffffff;
-                border: 1px solid #cbd5e1;
-                padding: 6px;
-                text-align: center;
-                margin-bottom: 8px;
-                page-break-inside: avoid;
-            }
-            .photo-label {
-                font-size: 7.5pt;
-                font-weight: bold;
-                color: #0d9488;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                margin-bottom: 4px;
-            }
-            .photo-label--purple {
-                color: #0d9488;
-            }
-            .photo-img {
-                width: 78px;
-                height: 98px;
-                border: 1px solid #cbd5e1;
-            }
-            .photo-img--small {
-                width: 78px;
-                height: 78px;
-                border: 1px solid #cbd5e1;
-            }
+        .photo-item {
+            margin-bottom: 20px;
+        }
 
-            /* --- NOTICE BOX --- */
-            .notice-box {
-                background-color: #f0fdf4;
-                border-left: 3.5pt solid #10b981;
-                border-top: 1px solid #bbf7d0;
-                border-right: 1px solid #bbf7d0;
-                border-bottom: 1px solid #bbf7d0;
-                padding: 7px 10px;
-                margin-top: 2px;
-                margin-bottom: 6px;
-                page-break-inside: avoid;
-            }
-            .notice-title {
-                font-weight: bold;
-                color: #15803d;
-                font-size: 8pt;
-                margin-bottom: 2px;
-                letter-spacing: 0.3px;
-            }
-            .notice-desc {
-                color: #166534;
-                font-size: 7.5pt;
-                margin: 0;
-                line-height: 1.35;
-            }
+        .photo-label {
+            font-size: 7.5pt;
+            color: #5eead4; /* Teal 300 */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
 
-            /* --- FOOTER SECTION --- */
-            .footer-table {
-                width: 100%;
-                border-top: 1px dashed #94a3b8;
-                margin-top: 6px;
-                padding-top: 6px;
-                border-collapse: collapse;
-                page-break-inside: avoid;
-            }
-            .footer-table td {
-                vertical-align: bottom;
-            }
-            .watermark-note {
-                font-size: 7pt;
-                color: #64748b;
-                line-height: 1.35;
-            }
-            .signature-label {
-                font-size: 7.5pt;
-                color: #475569;
-                margin-bottom: 22px;
-            }
-            .signature-line {
-                border-bottom: 1px solid #64748b;
-                margin-bottom: 3px;
-            }
-            .signature-brand {
-                font-size: 7.5pt;
-                font-weight: bold;
-                color: #0f172a;
-            }
+        .img-selfie {
+            width: 110px;
+            height: 140px;
+            border: 3px solid #1e293b;
+            background-color: #1e293b;
+        }
+
+        .img-close {
+            width: 110px;
+            height: 110px;
+            border: 3px solid #1e293b;
+            background-color: #1e293b;
+        }
+
+        /* --- RIGHT PANEL: DATA & TYPOGRAPHY --- */
+        .panel-data {
+            width: 68%;
+            vertical-align: top;
+            padding: 35px 30px;
+            background-color: #ffffff;
+        }
+
+        .doc-header {
+            border-bottom: 2px solid #0f172a;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            font-size: 22pt;
+            font-weight: bold;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            margin: 0 0 5px 0;
+            line-height: 1;
+        }
+
+        .brand-desc {
+            font-size: 9.5pt;
+            color: #64748b;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #0d9488;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 28px;
+        }
+
+        .data-table td {
+            padding: 7px 0;
+            border-bottom: 1px solid #f1f5f9; /* Sangat tipis dan clean */
+            vertical-align: top;
+        }
+
+        .data-label {
+            width: 35%;
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-value {
+            width: 65%;
+            font-size: 9.5pt;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .value-highlight {
+            color: #0d9488;
+        }
+
+        .notice-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #0d9488;
+            padding: 12px 15px;
+            margin-bottom: 40px;
+        }
+
+        .notice-text {
+            font-size: 8pt;
+            color: #334155;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* --- FOOTER --- */
+        .footer-layout {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .footer-layout td {
+            vertical-align: bottom;
+        }
+
+        .watermark {
+            font-size: 7.5pt;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        .signature-box {
+            width: 180px;
+            text-align: center;
+        }
+
+        .signature-title {
+            font-size: 8pt;
+            color: #475569;
+            margin-bottom: 40px; /* Ruang untuk tanda tangan */
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .signature-name {
+            font-size: 8.5pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
         </style>
     </head>
     <body>
-        <!-- Top Accent Color Bar -->
-        <table class="header-accent">
+        <!-- MASTER WRAPPER: Mengontrol border dan background utama dokumen -->
+        <table class="master-wrapper">
             <tr>
-                <td class="accent-navy"></td>
-                <td class="accent-teal"></td>
-                <td class="accent-gold"></td>
-            </tr>
-        </table>
-        <!-- Main Header Card -->
-        <table class="header-card">
-            <tr>
-                {% if brand.logo %}
-                    <td class="header-logo-cell">
-                        <img src="{{ brand.logo }}" alt="{{ brand.name }}">
-                    </td>
-                {% endif %}
-                <td class="header-title-cell">
-                    <div class="header-kicker">Official Participant Card</div>
-                    <div class="header-brand">{{ brand.name }}</div>
-                    <div class="header-sub">{{ brand.description|default:"Formulir Resmi &amp; Hasil Verifikasi Data Peserta" }}</div>
-                </td>
-                <td class="header-status-cell">
-                    <span class="status-badge">{{ participant.get_status_display }}</span>
-                    <div class="reg-number">ID: REG-{{ participant.id|stringformat:"04d" }}</div>
-                </td>
-            </tr>
-        </table>
-        <!-- Document Type Banner -->
-        <div class="header-bottom">
-            <span class="header-doc-type">Kartu Peserta Perlombaan &nbsp; / &nbsp; Dokumen Terverifikasi</span>
-        </div>
-        <!-- 2-Column Main Layout -->
-        <table class="layout-table">
-            <tr>
-                <!-- Left Column (Data Sections) -->
-                <td class="column-main">
-                    <!-- Section 1: Biodata Peserta -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">1. Data Biodata Peserta</h3>
-                        </div>
-                        <table class="info-table">
-                            <tr>
-                                <td class="label">Nama Panggung</td>
-                                <td class="value highlight-value">{{ participant.stage_name }}</td>
-                            </tr>
-                            <tr class="even-row">
-                                <td class="label">Nama Lengkap</td>
-                                <td class="value">{{ participant.name }}</td>
-                            </tr>
-                            <tr>
-                                <td class="label">NIK / Identitas</td>
-                                <td class="value">{{ participant.nik|default:"-" }}</td>
-                            </tr>
-                            <tr class="even-row">
-                                <td class="label">Tanggal Lahir</td>
-                                <td class="value">{{ participant.birthdate|date:"d M Y"|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td class="label">Jenis Kelamin</td>
-                                <td class="value">
-                                    {% if participant.gender == "male" %}Laki-laki{% elif participant.gender == "female" %}Perempuan{% else %} - {% endif %}
-                                </td>
-                            </tr>
-                            <tr class="even-row">
-                                <td class="label">Wilayah Asal</td>
-                                <td class="value">{{ participant.region }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- Section 2: Informasi Kontak & Waktu -->
-                    <div class="card">
-                        <div class="card-header card-header--teal">
-                            <h3 class="card-title card-title--teal">2. Informasi Kontak &amp; Waktu</h3>
-                        </div>
-                        <table class="info-table">
-                            <tr>
-                                <td class="label">WhatsApp</td>
-                                <td class="value">{{ participant.whatsapp|default:"-" }}</td>
-                            </tr>
-                            <tr class="even-row">
-                                <td class="label">Email Terdaftar</td>
-                                <td class="value">{{ participant.email|default:"-" }}</td>
-                            </tr>
-                            <tr>
-                                <td class="label">Tgl Pendaftaran</td>
-                                <td class="value">{{ participant.created_at|date:"d M Y H:i" }}</td>
-                            </tr>
-                            {% if participant.status == "verified" %}
-                                <tr class="even-row">
-                                    <td class="label">Tgl Verifikasi</td>
-                                    <td class="value" style="color: #16a34a;">{{ participant.updated_at|date:"d M Y H:i" }}</td>
-                                </tr>
-                            {% endif %}
-                        </table>
-                    </div>
-                </td>
-                <!-- Right Column (ID Code & Photos) -->
-                <td class="column-side">
-                    <!-- ID Code Box -->
-                    <div class="participant-no-box">
-                        <div class="participant-no-label">Peserta Terdaftar</div>
-                        <div class="participant-no-code">{{ participant.stage_name }}</div>
-                    </div>
-                    <!-- Photo Selfie -->
-                    {% if participant.photo_selfie %}
-                        <div class="photo-box">
-                            <div class="photo-label">Foto Selfie</div>
-                            <img class="photo-img"
-                                 src="{{ participant.photo_selfie|drive_image_url }}"
-                                 alt="Foto Selfie">
+                <!-- ================= LEFT PANEL ================= -->
+                <td class="panel-visual">
+                    {% if brand.logo %}
+                        <div>
+                            <img src="{{ brand.logo }}" class="brand-logo" alt="{{ brand.name }}">
                         </div>
                     {% endif %}
-                    <!-- Photo Close-up -->
-                    {% if participant.photo_close %}
-                        <div class="photo-box">
-                            <div class="photo-label photo-label--purple">Foto Close-up</div>
-                            <img class="photo-img photo-img--small"
-                                 src="{{ participant.photo_close|drive_image_url }}"
-                                 alt="Foto Close-up">
-                        </div>
-                    {% endif %}
-                </td>
-            </tr>
-        </table>
-        <!-- Notice Box -->
-        <div class="notice-box">
-            <div class="notice-title">INFORMASI VALIDASI PESERTA:</div>
-            <div class="notice-desc">
-                Dokumen ini merupakan hasil resmi dari sistem pendaftaran {{ brand.name }}. Harap simpan bukti ini untuk keperluan registrasi ulang di lokasi acara.
-            </div>
-        </div>
-        <!-- Footer Section -->
-        <table class="footer-table">
-            <tr>
-                <td>
-                    <div class="watermark-note">
-                        Diterbitkan secara elektronik oleh sistem resmi <strong>{{ brand.name }}</strong>.
-                        <br>
-                        Waktu Cetak: {% now "d M Y, H:i" %} WIB
+                    <div class="stage-name">{{ participant.stage_name }}</div>
+                    <div class="reg-id">ID: REG-{{ participant.id|stringformat:"04d" }}</div>
+                    <div style="margin-bottom: 10px;">
+                        <span class="status-badge">{{ participant.get_status_display }}</span>
+                    </div>
+                    <!-- PHOTOS SECTION -->
+                    <div class="photo-wrapper">
+                        {% if participant.photo_selfie %}
+                            <div class="photo-item">
+                                <div class="photo-label">Foto Selfie</div>
+                                <img src="{{ participant.photo_selfie|drive_image_url }}"
+                                     class="img-selfie"
+                                     alt="Selfie">
+                            </div>
+                        {% endif %}
+                        {% if participant.photo_close %}
+                            <div class="photo-item">
+                                <div class="photo-label">Foto Close-up</div>
+                                <img src="{{ participant.photo_close|drive_image_url }}"
+                                     class="img-close"
+                                     alt="Close-up">
+                            </div>
+                        {% endif %}
                     </div>
                 </td>
-                <td style="width: 150px; text-align: center;">
-                    <div class="signature-label">Panitia Penyelenggara,</div>
-                    <div class="signature-line"></div>
-                    <div class="signature-brand">{{ brand.name }}</div>
+                <!-- ================= RIGHT PANEL ================= -->
+                <td class="panel-data">
+                    <!-- HEADER DOC -->
+                    <div class="doc-header">
+                        <h1 class="brand-name">{{ brand.name }}</h1>
+                        <div class="brand-desc">{{ brand.description|default:"Formulir Resmi &amp; Hasil Verifikasi Data Peserta" }}</div>
+                    </div>
+                    <!-- BIODATA -->
+                    <div class="section-title">1. Biodata Pribadi</div>
+                    <table class="data-table">
+                        <tr>
+                            <td class="data-label">Nama Panggung</td>
+                            <td class="data-value value-highlight">{{ participant.stage_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Nama Lengkap</td>
+                            <td class="data-value">{{ participant.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">NIK / Identitas</td>
+                            <td class="data-value">{{ participant.nik|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Tanggal Lahir</td>
+                            <td class="data-value">{{ participant.birthdate|date:"d M Y"|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Jenis Kelamin</td>
+                            <td class="data-value">
+                                {% if participant.gender == "male" %}Laki-laki{% elif participant.gender == "female" %}Perempuan{% else %} - {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Wilayah Asal</td>
+                            <td class="data-value">{{ participant.region }}</td>
+                        </tr>
+                    </table>
+                    <!-- KONTAK & WAKTU -->
+                    <div class="section-title">2. Data Registrasi</div>
+                    <table class="data-table">
+                        <tr>
+                            <td class="data-label">WhatsApp</td>
+                            <td class="data-value">{{ participant.whatsapp|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Email Terdaftar</td>
+                            <td class="data-value">{{ participant.email|default:"-" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="data-label">Tgl Pendaftaran</td>
+                            <td class="data-value">{{ participant.created_at|date:"d M Y H:i" }}</td>
+                        </tr>
+                        {% if participant.status == "verified" %}
+                            <tr>
+                                <td class="data-label">Tgl Verifikasi</td>
+                                <td class="data-value" style="color: #16a34a;">{{ participant.updated_at|date:"d M Y H:i" }}</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    <!-- NOTICE -->
+                    <div class="notice-box">
+                        <p class="notice-text">
+                            <strong>INFORMASI VALIDASI:</strong> Dokumen ini merupakan hasil resmi dari sistem pendaftaran {{ brand.name }}. Harap simpan bukti ini untuk keperluan registrasi ulang di lokasi acara.
+                        </p>
+                    </div>
+                    <!-- SIGNATURE & WATERMARK -->
+                    <table class="footer-layout">
+                        <tr>
+                            <td>
+                                <div class="watermark">
+                                    Diterbitkan secara elektronik oleh sistem <strong>{{ brand.name }}</strong>.
+                                    <br>
+                                    Waktu Cetak: {% now "d M Y, H:i" %} WIB
+                                </div>
+                            </td>
+                            <td class="signature-box">
+                                <div class="signature-title">Panitia Penyelenggara,</div>
+                                <div class="signature-line"></div>
+                                <div class="signature-name">{{ brand.name }}</div>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
