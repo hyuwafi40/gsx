@@ -15,14 +15,17 @@
               action="{% url 'blog:article_list' %}"
               hx-get="{% url 'blog:article_list' %}"
               hx-target="#articleListContainer"
-              hx-swap="innerHTML">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text"
+              hx-swap="innerHTML"
+              hx-trigger="keyup changed delay:300ms from:input">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <label class="sr-only" for="article-search">Cari artikel</label>
+            <input id="article-search"
+                   type="search"
                    name="q"
                    class="search-input"
                    placeholder="Cari artikel..."
                    value="{{ query|default:'' }}">
         </form>
     </div>
-    <div id="articleListContainer">{% include "blog/article/content.html" %}</div>
+    <div id="articleListContainer" aria-live="polite">{% include "blog/article/content.html" %}</div>
 {% endblock %}

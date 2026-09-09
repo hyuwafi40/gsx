@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{% static 'css/article.css' %}">
     <link rel="stylesheet" href="{% static 'css/ads.css' %}">
 {% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/article.js' %}"></script>
+{% endblock %}
 {% block content %}
     <article class="blog-article-detail">
         <header class="blog-article-header">

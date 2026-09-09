@@ -22,6 +22,18 @@ html {
     overflow-x: hidden;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -903,6 +915,7 @@ body::after {
     font-weight: 600;
     letter-spacing: -0.3px;
     margin-bottom: 6px;
+    overflow-wrap: anywhere;
 }
 
 .blog-card-body h3 a {
