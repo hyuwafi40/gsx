@@ -14,13 +14,6 @@
                     <img src="{{ item.image }}"
                          alt="{{ item.name }}"
                          {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
-                    {% comment %}
-                    <div class="blog-carousel-overlay">
-                        <span class="blog-carousel-label">Pilihan unggulan</span>
-                        <h2>{{ item.name }}</h2>
-                        <a href="#berita" class="blog-carousel-btn">Lihat headline <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-                    {% endcomment %}
                 </article>
             {% endfor %}
         </div>
