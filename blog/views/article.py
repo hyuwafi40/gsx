@@ -43,7 +43,11 @@ class ArticleDetailView(View):
     template_name = "blog/article/detail.html"
 
     def get(self, request, slug):
-        article = get_object_or_404(Article, slug=slug, status="published")
+        article = get_object_or_404(
+            Article.objects.select_related("category").prefetch_related("tag"),
+            slug=slug,
+            status="published",
+        )
         comments = Comment.objects.filter(article=article, status="approved").order_by(
             "-created_at"
         )

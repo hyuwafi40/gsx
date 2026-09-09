@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 {% load static %}
 {% block title %}{{ article.title }} - {{ blog_brand_name|default:"ApexUI" }}{% endblock %}
+{% block meta %}
+    <meta name="description"
+          content="{{ article.content|striptags|truncatechars:160 }}">
+{% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/article.css' %}">
     <link rel="stylesheet" href="{% static 'css/ads.css' %}">
