@@ -3,8 +3,12 @@
         <a href="{{ ad.link }}"
            target="_blank"
            rel="noopener noreferrer"
-           class="blog-ad-link">
-            <img src="{{ ad.image }}" alt="{{ ad.name }}" loading="lazy">
+           class="blog-ad-link"
+           aria-label="Buka iklan {{ ad.name }}">
+            <img src="{{ ad.image }}"
+                 alt="Iklan: {{ ad.name }}"
+                 loading="lazy"
+                 decoding="async">
         </a>
     </div>
 {% endif %}

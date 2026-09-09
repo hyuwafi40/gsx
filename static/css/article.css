@@ -247,27 +247,6 @@ textarea.input-control {
     margin-top: 4px;
 }
 
-.blog-ad-slot {
-    margin: 24px 0;
-    border-radius: var(--rad-lg);
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-}
-
-.blog-ad-link {
-    display: block;
-    width: 100%;
-}
-
-.blog-ad-link img {
-    width: 100%;
-    height: auto;
-    max-height: 180px;
-    object-fit: cover;
-    display: block;
-}
-
 @media (max-width: 599px) {
     .blog-article-detail {
         padding: 18px;
