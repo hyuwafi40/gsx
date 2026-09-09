@@ -19,61 +19,92 @@
         }
 
         .header-accent {
-            background-color: #fbbf24;
-            height: 6px;
+            width: 100%;
+            height: 7px;
+            border-collapse: collapse;
+        }
+
+        .header-accent td {
+            height: 7px;
+            padding: 0;
+        }
+
+        .accent-navy {
+            width: 58%;
+            background-color: #102a43;
+        }
+
+        .accent-teal {
+            width: 27%;
+            background-color: #0f766e;
+        }
+
+        .accent-gold {
+            width: 15%;
+            background-color: #d99a22;
         }
 
         .header-card {
             width: 100%;
-            background-color: #1e3a5f;
+            background-color: #102a43;
             color: #ffffff;
         }
 
         .header-logo-cell {
-            width: 130px;
-            padding: 10px 14px 10px 16px;
+            width: 92px;
+            padding: 14px 8px 14px 14px;
             vertical-align: middle;
         }
 
         .header-logo-cell img {
-            width: 100px;
-            height: 100px;
-            border: 2px solid rgba(255,255,255,0.7);
+            width: 70px;
+            height: 70px;
+            border: 2px solid #d99a22;
         }
 
         .header-title-cell {
-            padding: 10px 16px;
+            padding: 14px 12px;
             vertical-align: middle;
         }
 
         .header-brand {
-            font-size: 20pt;
+            font-size: 19pt;
             font-weight: bold;
             text-transform: uppercase;
             color: #ffffff;
             margin: 0;
-            letter-spacing: 1px;
+            letter-spacing: 0.7px;
+        }
+
+        .header-kicker {
+            color: #d99a22;
+            font-size: 7pt;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
 
         .header-sub {
             font-size: 8pt;
-            color: #93c5fd;
-            margin: 4px 0 0 0;
+            color: #c6d6e5;
+            margin: 5px 0 0 0;
+            line-height: 1.35;
         }
 
         .header-status-cell {
-            width: 130px;
-            padding: 10px 16px;
+            width: 112px;
+            padding: 14px 14px 14px 8px;
             vertical-align: middle;
             text-align: right;
         }
 
         .status-badge {
             display: inline-block;
-            background-color: #10b981;
+            background-color: #0f766e;
             color: #ffffff;
-            padding: 5px 12px;
-            font-size: 8pt;
+            padding: 5px 9px;
+            font-size: 7.5pt;
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -81,21 +112,21 @@
         .reg-number {
             font-size: 9pt;
             font-weight: bold;
-            color: #fbbf24;
+            color: #f3c45b;
             margin-top: 4px;
         }
 
         .header-bottom {
-            background-color: #162d4a;
-            padding: 6px 16px;
-            text-align: center;
+            background-color: #e8f0f5;
+            padding: 7px 14px;
+            text-align: left;
         }
 
         .header-doc-type {
             font-size: 7.5pt;
-            color: #94a3b8;
+            color: #486581;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.4px;
             font-weight: bold;
         }
 
@@ -118,8 +149,8 @@
 
         .card {
             background-color: #ffffff;
-            border: 1px solid #cbd5e1;
-            padding: 8px 10px;
+            border: 1px solid #d9e2ec;
+            padding: 10px 11px;
             margin-bottom: 8px;
             page-break-inside: avoid;
         }
@@ -133,13 +164,13 @@
         .card-title {
             font-size: 9.5pt;
             font-weight: bold;
-            color: #7c3aed;
+            color: #102a43;
             margin: 0;
             text-transform: uppercase;
         }
 
         .card-title--teal {
-            color: #0d9488;
+            color: #0f766e;
         }
 
         .info-table {
@@ -166,12 +197,12 @@
         }
 
         .highlight-value {
-            color: #2563eb;
+            color: #0f766e;
         }
 
         .participant-no-box {
-            background-color: #eff6ff;
-            border: 1px solid #bfdbfe;
+            background-color: #102a43;
+            border: 1px solid #102a43;
             text-align: center;
             padding: 8px;
             margin-bottom: 8px;
@@ -182,20 +213,20 @@
             font-size: 7pt;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #3b82f6;
+            color: #b8cadd;
             font-weight: bold;
         }
 
         .participant-no-code {
             font-size: 13pt;
             font-weight: bold;
-            color: #d97706;
+            color: #f3c45b;
             margin-top: 2px;
         }
 
         .photo-box {
             background-color: #ffffff;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #d9e2ec;
             padding: 6px;
             text-align: center;
             margin-bottom: 8px;
@@ -205,13 +236,13 @@
         .photo-label {
             font-size: 7.5pt;
             font-weight: bold;
-            color: #2563eb;
+            color: #0f766e;
             text-transform: uppercase;
             margin-bottom: 4px;
         }
 
         .photo-label--purple {
-            color: #7c3aed;
+            color: #0f766e;
         }
 
         .photo-img {
@@ -288,7 +319,13 @@
         </style>
     </head>
     <body>
-        <div class="header-accent"></div>
+        <table class="header-accent">
+            <tr>
+                <td class="accent-navy"></td>
+                <td class="accent-teal"></td>
+                <td class="accent-gold"></td>
+            </tr>
+        </table>
         <table class="header-card">
             <tr>
                 {% if brand.logo %}
@@ -297,6 +334,7 @@
                     </td>
                 {% endif %}
                 <td class="header-title-cell">
+                    <div class="header-kicker">Official Participant Card</div>
                     <div class="header-brand">{{ brand.name }}</div>
                     <div class="header-sub">{{ brand.description|default:"Formulir Resmi &amp; Hasil Verifikasi Data Peserta" }}</div>
                 </td>
@@ -307,7 +345,7 @@
             </tr>
         </table>
         <div class="header-bottom">
-            <span class="header-doc-type">Kartu Pendaftaran Peserta</span>
+            <span class="header-doc-type">Kartu Peserta Perlombaan &nbsp; / &nbsp; Dokumen Terverifikasi</span>
         </div>
         <table class="layout-table">
             <tr>
