@@ -1,6 +1,7 @@
 .blog-gallery-grid,
 .blog-photo-grid {
     display: grid;
+    min-width: 0;
     gap: 16px;
 }
 
@@ -14,6 +15,24 @@
 .blog-gallery-card:hover,
 .blog-photo-card:hover {
     box-shadow: 0 18px 50px rgba(31, 63, 86, 0.15);
+}
+
+.blog-gallery-card .blog-card-media,
+.blog-photo-card .blog-card-media {
+    aspect-ratio: 4 / 3;
+}
+
+.blog-gallery-card .blog-card-media img,
+.blog-photo-card .blog-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-gallery-card h3,
+.blog-photo-card h3,
+.blog-photo-card p {
+    overflow-wrap: anywhere;
 }
 
 .blog-card-media-placeholder {
@@ -45,24 +64,31 @@
 }
 
 .blog-photo-detail-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    min-height: 180px;
     max-height: 560px;
     overflow: hidden;
     border-radius: var(--rad-md);
+    background: rgba(0, 0, 0, 0.04);
     margin-bottom: 16px;
 }
 
 .blog-photo-detail-media img {
     width: 100%;
+    max-height: 560px;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .blog-photo-detail-title {
     font-size: 24px;
     font-weight: 700;
-    letter-spacing: -0.6px;
+    letter-spacing: 0;
     margin: 0 0 8px;
+    overflow-wrap: anywhere;
 }
 
 .blog-photo-detail-caption {
@@ -76,7 +102,7 @@
 
     .blog-gallery-grid,
     .blog-photo-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -84,6 +110,22 @@
 
     .blog-gallery-grid,
     .blog-photo-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 599px) {
+    .blog-photo-detail-card {
+        padding: 16px;
+        border-radius: var(--rad-md);
+    }
+
+    .blog-photo-detail-title {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .blog-photo-detail-caption {
+        font-size: 14px;
     }
 }

@@ -16,7 +16,9 @@
     <div class="blog-gallery-grid">
         {% for album in album_obj %}
             <article class="blog-gallery-card blog-card">
-                <a href="{% url 'blog:photo_list' album.slug %}" class="blog-card-media">
+                     <a href="{% url 'blog:photo_list' album.slug %}"
+                         class="blog-card-media"
+                         aria-label="Buka album {{ album.name }}">
                     {% if album.thumbnail %}
                         <img src="{{ album.thumbnail }}" alt="{{ album.name }}" loading="lazy">
                     {% else %}

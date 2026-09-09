@@ -10,7 +10,8 @@
 {% block content %}
     <div class="blog-photo-detail">
         <a href="{% url 'blog:photo_list' album.slug %}"
-           class="blog-btn-ghost-light mb-20">
+              class="blog-btn-ghost-light mb-20"
+              aria-label="Kembali ke album {{ album.name }}">
             <i class="fa-solid fa-arrow-left"></i> Kembali ke Album
         </a>
         <article class="blog-photo-detail-card blog-card">
