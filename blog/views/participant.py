@@ -9,6 +9,32 @@ from xhtml2pdf import pisa
 from core.models import Brand, Participant
 
 
+class ParticipantMaskingMixin:
+    def mask_value(self, value, mask_type):
+        if not value:
+            return "-"
+        if mask_type == "nik":
+            if len(str(value)) >= 4:
+                return "**** **** **** " + str(value)[-4:]
+            return "*" * len(str(value))
+        if mask_type == "birthdate":
+            if value:
+                return "** ** " + str(value.year)[-2:]
+            return "-"
+        if mask_type == "email":
+            if "@" in value:
+                local, domain = value.split("@", 1)
+                if len(local) > 2:
+                    return local[0] + "***@" + domain
+                return "***@" + domain
+            return "***"
+        if mask_type == "whatsapp":
+            if len(value) > 4:
+                return "***-***-" + value[-4:]
+            return "***"
+        return value
+
+
 class ParticipantListView(View):
     template_name = "blog/participant.html"
     paginate_by = 10
@@ -63,32 +89,8 @@ class ParticipantSearchView(View):
         return render(request, self.template_name, context)
 
 
-class ParticipantDetailView(View):
+class ParticipantDetailView(ParticipantMaskingMixin, View):
     template_name = "blog/participant/detail.html"
-
-    def mask_value(self, value, mask_type):
-        if not value:
-            return "-"
-        if mask_type == "nik":
-            if len(str(value)) >= 4:
-                return "**** **** **** " + str(value)[-4:]
-            return "*" * len(str(value))
-        if mask_type == "birthdate":
-            if value:
-                return "** ** " + str(value.year)[-2:]
-            return "-"
-        if mask_type == "email":
-            if "@" in value:
-                local, domain = value.split("@", 1)
-                if len(local) > 2:
-                    return local[0] + "***@" + domain
-                return "***@" + domain
-            return "***"
-        if mask_type == "whatsapp":
-            if len(value) > 4:
-                return "***-***-" + value[-4:]
-            return "***"
-        return value
 
     def get(self, request, pk):
         participant = get_object_or_404(Participant, pk=pk, status="verified")
@@ -104,7 +106,7 @@ class ParticipantDetailView(View):
         return render(request, self.template_name, context)
 
 
-class ParticipantDownloadView(View):
+class ParticipantDownloadView(ParticipantMaskingMixin, View):
     def get(self, request, pk):
         participant = get_object_or_404(Participant, pk=pk, status="verified")
         brand = Brand.get_solo()
